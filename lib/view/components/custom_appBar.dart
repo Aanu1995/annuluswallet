@@ -18,6 +18,23 @@ class AppBarLogo extends StatelessWidget {
   }
 }
 
+class BackArrow extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      child: Image.asset(
+        leftArrow,
+        height: 28.0,
+        color: Theme.of(context).iconTheme.color,
+        width: 28.0,
+      ),
+      onTap: () {
+        Navigator.pop(context);
+      },
+    );
+  }
+}
+
 class AppBarDrawerLogo extends StatelessWidget {
   final globalKey;
   AppBarDrawerLogo({this.globalKey});

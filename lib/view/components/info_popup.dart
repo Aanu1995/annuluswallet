@@ -14,13 +14,15 @@ class InfoPopup extends StatelessWidget {
   Widget build(BuildContext context) {
     final verticalOffset = offset.dy - AppBar().preferredSize.height - 225;
     final theme = Theme.of(context);
+    final infoProvider =
+        Provider.of<InfoDisplayProvider>(context, listen: false);
     return Container(
       child: Stack(
         alignment: Alignment.center,
         children: <Widget>[
           Positioned(
             top: verticalOffset + (containerHeight - 30),
-            left: offset.dx + 57,
+            left: offset.dx - 20,
             child: Icon(
               Icons.arrow_drop_down,
               size: 70.0,
@@ -48,18 +50,15 @@ class InfoPopup extends StatelessWidget {
                         .copyWith(color: Colors.black, height: 1.4),
                   ),
                   EmptySpace(multiple: 3.0),
-                  Consumer<InfoDisplayProvider>(
-                    builder: (context, infoProvider, _) {
-                      return InkWell(
-                        child: Text(
-                          "CLOSE",
-                          style: theme.primaryTextTheme.subhead.copyWith(
-                            color: theme.iconTheme.color,
-                          ),
-                        ),
-                        onTap: () => infoProvider.display(),
-                      );
-                    },
+                  InkWell(
+                    child: Text(
+                      "CLOSE",
+                      style: theme.primaryTextTheme.subhead.copyWith(
+                        color: theme.iconTheme.color,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    onTap: () => infoProvider.display(),
                   ),
                   EmptySpace(multiple: 0.5),
                 ],
@@ -68,6 +67,72 @@ class InfoPopup extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class ShowCase extends StatelessWidget {
+  final Offset offset;
+  final String info;
+  ShowCase({this.offset, this.info});
+
+  final containerHeight = 150.0;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final verticalOffset = offset.dy - AppBar().preferredSize.height;
+    final infoProvider =
+        Provider.of<InfoDisplayProvider>(context, listen: false);
+    return Stack(
+      alignment: Alignment.center,
+      children: <Widget>[
+        Positioned(
+          top: verticalOffset - 23,
+          left: offset.dx - 20,
+          child: Icon(
+            Icons.arrow_drop_up,
+            size: 70.0,
+            color: Colors.white,
+          ),
+        ),
+        Positioned(
+          top: verticalOffset + 17,
+          child: Container(
+            padding: EdgeInsets.only(left: 16.0, right: 16.0),
+            width: 300,
+            height: containerHeight,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(8.0),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  info,
+                  textAlign: TextAlign.justify,
+                  style: theme.primaryTextTheme.subtitle
+                      .copyWith(color: Colors.black, height: 1.4),
+                ),
+                EmptySpace(multiple: 3.0),
+                InkWell(
+                  child: Text(
+                    "CLOSE",
+                    style: theme.primaryTextTheme.subhead.copyWith(
+                      color: theme.iconTheme.color,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  onTap: () => infoProvider.display(),
+                ),
+                EmptySpace(multiple: 0.5),
+              ],
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

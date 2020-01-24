@@ -39,17 +39,6 @@ class MyApp extends StatelessWidget {
               color: ColorUtils.ICON_COLOR,
             ),
           ),
-          textTheme: TextTheme(
-            title: TextStyle(
-              color: Color(0xFFFFFFFF),
-            ),
-            body1: TextStyle(
-              color: Color(0xFF1C1F26),
-            ),
-            body2: TextStyle(
-              color: Color(0xFF000000),
-            ),
-          ),
           bottomAppBarTheme: BottomAppBarTheme(
             color: ColorUtils.BOTTOM_APPBAR_COLOR,
           ),

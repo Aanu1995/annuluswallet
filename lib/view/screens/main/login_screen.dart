@@ -1,246 +1,150 @@
+import 'package:annuluswallet/router/router.dart';
 import 'package:annuluswallet/view/components/export_components.dart';
+import 'package:annuluswallet/view/screens/new_wallet/create_password/components/header_error_message.dart';
 import 'package:flutter/material.dart';
-import 'package:annuluswallet/model/colors.dart';
 import 'package:annuluswallet/model/images.dart';
 import 'package:annuluswallet/view/screens/main/dashboard.dart';
-import 'package:annuluswallet/view/widget/app_bar.dart';
+import 'package:provider/provider.dart';
+import 'package:annuluswallet/provider/info_display_provider.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends StatelessWidget {
   final page;
-  LoginScreen({this.page});
+  const LoginScreen({this.page});
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider.value(
+      value: FingerprintPopupProvider(),
+      child: _LoginScreen(page: page),
+    );
+  }
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreen extends StatefulWidget {
+  final page;
+  _LoginScreen({this.page});
+  @override
+  __LoginScreenState createState() => __LoginScreenState();
+}
+
+class __LoginScreenState extends State<_LoginScreen> {
   GlobalKey<ScaffoldState> _globalKey = GlobalKey();
 
-  TextEditingController passwordController = TextEditingController();
+  final passwordController = TextEditingController();
 
   bool isVisible = true;
-  bool isClicked = false;
   bool isValidate;
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final theme = Theme.of(context);
+    var color = isValidate == true || isValidate == null
+        ? theme.iconTheme.color
+        : Colors.red;
+    final fingerProvider = Provider.of<FingerprintPopupProvider>(context);
     return Scaffold(
       key: _globalKey,
-      appBar: drawerOnly(context: context, globalKey: _globalKey),
-      resizeToAvoidBottomPadding: true,
-      body: Stack(
-        children: <Widget>[
-          SingleChildScrollView(
-            child: Column(
-              children: <Widget>[
-                Image.asset(logo, height: 42, width: 124),
-                SizedBox(
-                  height: 50.0,
-                ),
-                Text(
-                  "Welcome back",
-                  style: TextStyle(
-                    fontSize: 24.0,
-                    letterSpacing: 1.2,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-                SizedBox(
-                  height: 40.0,
-                ),
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(4.0),
-                      border: Border.all(
-                        color: isValidate == true || isValidate == null
-                            ? Theme.of(context).iconTheme.color
-                            : Color(0xFFf55d7f),
-                      ),
-                    ),
-                    child: Theme(
-                      data: ThemeData(
-                        primaryColor: isValidate == true || isValidate == null
-                            ? Theme.of(context).iconTheme.color
-                            : Color(0xFFf55d7f),
-                      ),
-                      child: TextField(
-                        controller: passwordController,
-                        textInputAction: TextInputAction.done,
-                        obscureText: isVisible,
-                        style: TextStyle(
-                          fontWeight: FontWeight.w400,
-                          color: Colors.white,
-                          fontSize: 18.0,
-                          letterSpacing: 1.0,
-                        ),
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          suffixIcon: Container(
-                              padding: EdgeInsets.only(right: 10.0),
-                              child: GestureDetector(
-                                child: Image.asset(isVisible ? show : showOff),
-                                onTap: () {
-                                  setState(() {
-                                    isVisible = !isVisible;
-                                  });
-                                },
-                              )),
-                          focusColor: Theme.of(context).iconTheme.color,
-                          hintText: "Enter your password to continue",
-                          hintStyle:
-                              TextStyle(color: Colors.white, fontSize: 16.0),
-                        ),
-                        onChanged: (value) {
-                          setState(() {
-                            isValidate = false;
-                          });
-                        },
-                      ),
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                widget.page ?? DashBoardPage()),
-                        (Route<dynamic> route) => false);
-                  },
-                  child: Container(
-                    margin: EdgeInsets.only(
-                        top: 30.0, bottom: 10.0, left: 16.0, right: 16.0),
-                    height: 60.0,
-                    decoration: BoxDecoration(
-                        color: Theme.of(context).iconTheme.color,
-                        borderRadius: BorderRadius.circular(10.0)),
-                    child: Center(
-                      child: Text(
-                        "LOGIN",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18.0,
-                          letterSpacing: 2.0,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                FlatButton(
-                  onPressed: () {},
-                  child: Text(
-                    "FORGOT PASSWORD",
-                    style: TextStyle(
+      appBar: PreferredSize(
+        preferredSize: Size(size.width, 80),
+        child: AppBarDrawerLogo(globalKey: _globalKey),
+      ),
+      body: Container(
+        margin: EdgeInsets.all(16.0),
+        child: Stack(
+          children: <Widget>[
+            SingleChildScrollView(
+              child: Column(
+                children: <Widget>[
+                  EmptySpace(multiple: 4.0),
+                  Text(
+                    "Welcome back",
+                    style: theme.textTheme.title.copyWith(
+                      color: Colors.white,
                       fontWeight: FontWeight.w400,
-                      fontSize: 16.0,
-                      letterSpacing: 0.7,
-                      color: infoColor,
+                      letterSpacing: 1.3,
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: 20.0,
-                ),
-                GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        isClicked = !isClicked;
-                      });
-                    },
+                  EmptySpace(multiple: 6.0),
+                  TextField(
+                    controller: passwordController,
+                    obscureText: isVisible,
+                    cursorColor: Colors.white,
+                    style: theme.primaryTextTheme.title.copyWith(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w400,
+                    ),
+                    decoration: InputDecoration(
+                      suffixIcon: InkWell(
+                        child: Image.asset(
+                          isVisible ? show : showOff,
+                          height: 25.0,
+                          width: 25.0,
+                          color: color,
+                        ),
+                        onTap: () => setState(() {
+                          isVisible = !isVisible;
+                        }),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: color,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: color,
+                        ),
+                      ),
+                      labelText: "Enter your password",
+                      labelStyle: theme.primaryTextTheme.subhead.copyWith(
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                  if (isValidate == false) EmptyFieldMessage(),
+                  EmptySpace(multiple: 10.0),
+                  CustomButton(text: "LOGIN", onPressed: onPressed),
+                  EmptySpace(),
+                  Align(
+                    alignment: Alignment.topRight,
+                    child: FlatButton(
+                      child: Text(
+                        "FORGOT PASSWORD",
+                        style: theme.textTheme.subtitle.copyWith(
+                          color: Colors.white70,
+                        ),
+                      ),
+                      onPressed: () {},
+                    ),
+                  ),
+                  EmptySpace(multiple: 5.0),
+                  InkWell(
                     child: Image.asset(
                       touchId,
-                      height: 80.0,
-                      width: 80.0,
-                    )),
-                SizedBox(height: 30.0),
-              ],
+                      height: 60.0,
+                      width: 60.0,
+                    ),
+                    onTap: () => fingerProvider.display(),
+                  ),
+                  SizedBox(height: 30.0),
+                ],
+              ),
             ),
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: isClicked
-                ? Container(
-                    height: 300,
-                    width: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    child: Container(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 20.0, vertical: 20.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            "Authenticate",
-                            style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 17.0,
-                              letterSpacing: 1.5,
-                              color: Theme.of(context).appBarTheme.color,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 50.0,
-                          ),
-                          Container(
-                            alignment: Alignment.center,
-                            child: Column(
-                              children: <Widget>[
-                                Image.asset(
-                                  touch,
-                                  height: 80.0,
-                                  width: 80.0,
-                                ),
-                                SizedBox(
-                                  height: 10.0,
-                                ),
-                                Text(
-                                  "Touch the fingerprint sensor",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 13.0,
-                                    letterSpacing: 0.7,
-                                    color: Theme.of(context).appBarTheme.color,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            height: 30.0,
-                          ),
-                          FlatButton(
-                            onPressed: () {
-                              setState(() {
-                                isClicked = !isClicked;
-                              });
-                            },
-                            child: Text(
-                              "CANCEL",
-                              style: TextStyle(
-                                fontWeight: FontWeight.w400,
-                                fontSize: 16.0,
-                                letterSpacing: 0.7,
-                                color: Color(0xFF008877),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  )
-                : Container(),
-          )
-        ],
+            if (fingerProvider.isDisplayed) FingerprintPopup()
+          ],
+        ),
       ),
       drawer: UnAuthenticatedDrawer(),
       floatingActionButton: VersionTypeText(),
     );
+  }
+
+  void onPressed() {
+    if (passwordController.text.isNotEmpty) {
+      Router.goToWidget(context: context, page: widget.page ?? DashBoardPage());
+      return;
+    }
+    isValidate = false;
+    setState(() {});
   }
 }

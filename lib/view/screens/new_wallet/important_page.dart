@@ -1,8 +1,8 @@
-import 'package:annuluswallet/router/router.dart';
-import 'package:annuluswallet/view/components/custom_buttons.dart';
-import 'package:annuluswallet/view/components/empty_space.dart';
 import 'package:flutter/material.dart';
+
+import 'package:annuluswallet/router/router.dart';
 import 'package:annuluswallet/model/images.dart';
+import 'package:annuluswallet/view/components/export_components.dart';
 
 class ImportantPage extends StatelessWidget {
   final String _paragraph1 =
@@ -16,26 +16,14 @@ class ImportantPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0.0,
-        leading: InkWell(
-          child: Image.asset(
-            leftArrow,
-            height: 28.0,
-            color: theme.iconTheme.color,
-            width: 28.0,
-          ),
-          onTap: () {
-            Navigator.pop(context);
-          },
-        ),
-      ),
+      appBar: AppBar(elevation: 0.0, leading: BackArrow()),
       body: Container(
         margin: EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
         child: Column(
           children: <Widget>[
             Container(
               alignment: Alignment.topLeft,
+              margin: EdgeInsets.only(left: 30.0),
               child: Text(
                 "Before you get started",
                 style: theme.primaryTextTheme.title,
@@ -65,9 +53,9 @@ class ImportantPage extends StatelessWidget {
                       ],
                     ),
                   ),
-                  _MyText(text: _paragraph1),
-                  _MyText(text: _paragraph2),
-                  _MyText(text: _paragraph3),
+                  CustomText(text: _paragraph1),
+                  CustomText(text: _paragraph2),
+                  CustomText(text: _paragraph3),
                 ],
               )),
             ),
@@ -79,26 +67,6 @@ class ImportantPage extends StatelessWidget {
               ),
             ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class _MyText extends StatelessWidget {
-  final String text;
-  const _MyText({this.text});
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 12.0),
-      child: Text(
-        text,
-        textAlign: TextAlign.justify,
-        style: theme.primaryTextTheme.subtitle.copyWith(
-          height: 1.5,
-          fontWeight: FontWeight.w400,
         ),
       ),
     );

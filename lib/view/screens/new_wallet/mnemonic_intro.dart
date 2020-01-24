@@ -1,12 +1,11 @@
+import 'package:annuluswallet/provider/info_display_provider.dart';
 import 'package:flutter/material.dart';
+
+import 'package:annuluswallet/router/router.dart';
+import 'package:annuluswallet/view/components/export_components.dart';
 import 'package:provider/provider.dart';
-import 'package:annuluswallet/controller/app_function.dart';
-import 'package:annuluswallet/model/data.dart';
 import 'package:annuluswallet/model/images.dart';
-import 'package:annuluswallet/provider/walletProvider.dart';
 import 'package:annuluswallet/view/screens/new_wallet/mnemonic_match.dart';
-import 'package:annuluswallet/view/widget/app_bar.dart';
-import 'package:annuluswallet/view/widget/common.dart';
 
 class MnemonicIntroPage extends StatefulWidget {
   @override
@@ -23,269 +22,175 @@ class _MnemonicIntroPageState extends State<MnemonicIntroPage> {
     }
   }
 
+  final String paragraph1 =
+      "These mnemonic recovery phrase words are required to restore your wallet.";
+  final String paragraph2 =
+      "In case your current mobile is unsuable, your 24 mnemonic phrase words will allow you to restore and recover your wallet on another device. If you lose them, you won't be able to restore this wallet and recover your Annulus (RPD).";
+  final paragraph3 =
+      "Please write down your 24 mnemonic phrase words and keep them very save.";
+  final paragraph4 =
+      "Please tell me you have securely saved these recovery phrase words?";
+
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final clipboard = Provider.of<ClipBoardProvider>(context);
     return Scaffold(
-        appBar: newWalletAppBar2(context, height: 60.0),
-        body: Consumer<RapidsProvider>(
-          builder: (context, clipboard, child) {
-            return Stack(
+      appBar: AppBar(
+        elevation: 0.0,
+        leading: BackArrow(),
+      ),
+      body: Stack(
+        children: <Widget>[
+          Container(
+            margin: EdgeInsets.only(left: 16.0, right: 16.0),
+            child: Column(
               children: <Widget>[
                 Container(
-                  margin: EdgeInsets.only(left: 14.0, right: 14.0),
-                  child: Column(
-                    children: <Widget>[
-                      Container(
-                        alignment: Alignment.topLeft,
-                        margin: EdgeInsets.only(left: 16.0),
-                        child: Text(
-                          "Step 3 of 4",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20.0,
-                            letterSpacing: 1.0,
-                            color: Theme.of(context).iconTheme.color,
-                          ),
+                  padding: EdgeInsets.only(left: 30.0),
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    "Step 3 of 4",
+                    style: theme.primaryTextTheme.title,
+                  ),
+                ),
+                SizedBox(
+                  height: 20.0,
+                ),
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            RichText(
+                              text: TextSpan(
+                                children: [
+                                  TextSpan(
+                                    text: "IMPORTANT",
+                                    style: theme.primaryTextTheme.subhead,
+                                  ),
+                                  WidgetSpan(
+                                    alignment: PlaceholderAlignment.middle,
+                                    child: Image.asset(
+                                      important,
+                                      height: 28.0,
+                                      width: 28.0,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            EmptySpace(multiple: 2.5),
+                            CustomText(text: paragraph1),
+                            CustomText(text: paragraph2),
+                          ],
                         ),
-                      ),
-                      SizedBox(
-                        height: 20.0,
-                      ),
-                      Expanded(
-                        child: SingleChildScrollView(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                        Row(
+                          children: <Widget>[
+                            Expanded(
+                              flex: 4,
+                              child: Image.asset(
+                                mnemonicpphrase,
+                              ),
+                            ),
+                            Expanded(
+                              flex: 6,
+                              child: CustomText(text: paragraph3),
+                            )
+                          ],
+                        ),
+                        EmptySpace(multiple: 2.0),
+                        Column(
+                          children: <Widget>[
+                            Container(
+                              padding: EdgeInsets.all(16.0),
+                              margin: EdgeInsets.only(left: 8.0, right: 8.0),
+                              width: MediaQuery.of(context).size.width,
+                              child: Text(
+                                recoveryWords,
+                                textAlign: TextAlign.justify,
+                                style: theme.primaryTextTheme.title.copyWith(
+                                  height: 1.5,
+                                  fontWeight: FontWeight.w400,
+                                  wordSpacing: 1.0,
+                                ),
+                              ),
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Colors.white),
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(top: 20.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
-                              Container(
-                                margin: EdgeInsets.only(left: 16.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: <Widget>[
-                                        Text(
-                                          "IMPORTANT",
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w300,
-                                            fontSize: 20.0,
-                                            letterSpacing: 1.0,
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 2.0,
-                                        ),
-                                        Image.asset(
-                                          important,
-                                          height: 30.0,
-                                          width: 30.0,
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 20.0,
-                                    ),
-                                    Container(
-                                      child: Text(
-                                        paragraph1,
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 15.0,
-                                          letterSpacing: 1.0,
-                                          height: 1.4,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 20.0,
-                                    ),
-                                    Container(
-                                      child: Text(
-                                        paragraph2,
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 15.0,
-                                          letterSpacing: 1.0,
-                                          height: 1.4,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 30.0,
-                                    ),
-                                    Container(
-                                      alignment: Alignment.center,
-                                      child: Text(
-                                        paragraph3,
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 16.0,
-                                          letterSpacing: 1.0,
-                                          height: 1.4,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
+                              Text(
+                                "Copy to Clipboard",
+                                textAlign: TextAlign.center,
+                                style: theme.primaryTextTheme.subhead.copyWith(
+                                  fontWeight: FontWeight.w300,
                                 ),
                               ),
-                              SizedBox(
-                                height: 30.0,
-                              ),
-                              Align(
-                                alignment: Alignment.center,
-                                child: Image.asset(
-                                  mnemonicpphrase,
-                                ),
-                              ),
-                              SizedBox(
-                                height: 30.0,
-                              ),
-                              Container(
-                                height: 260.0,
-                                child: Stack(
-                                  children: <Widget>[
-                                    Container(
-                                      padding: EdgeInsets.symmetric(
-                                          vertical: 20.0, horizontal: 30.0),
-                                      margin: EdgeInsets.only(
-                                          left: 2.0, right: 2.0),
-                                      width: MediaQuery.of(context).size.width,
-                                      child: Text(
-                                        recoveryWords,
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            fontSize: 18.0,
-                                            height: 2.0,
-                                            wordSpacing: 6.0,
-                                            color: Colors.white),
-                                      ),
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                          color: Color(0xFF979797),
-                                          width: 2.0,
-                                        ),
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                margin: EdgeInsets.only(top: 20.0),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: <Widget>[
-                                    Container(
-                                      child: Text(
-                                        "Copy to Clipboard",
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 16.0,
-                                          letterSpacing: 1.0,
-                                          height: 1.4,
-                                          color:
-                                              Theme.of(context).iconTheme.color,
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 20.0,
-                                    ),
-                                    GestureDetector(
-                                      onTap: () {
-                                        AppFunction().copyClipboard(
-                                            recoveryWords, clipboard);
-                                      },
-                                      child: Container(
-                                        height: 50,
-                                        width: 50,
-                                        alignment: Alignment.center,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(10.0),
-                                            color: Theme.of(context)
-                                                .iconTheme
-                                                .color),
-                                        child: Image.asset(
-                                          copy2,
-                                          height: 30.0,
-                                          fit: BoxFit.fitHeight,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                height: 30.0,
-                              ),
-                              Container(
-                                alignment: Alignment.center,
-                                margin:
-                                    EdgeInsets.only(left: 16.0, right: 16.0),
-                                child: Text(
-                                  paragraph4,
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 16.0,
-                                    letterSpacing: 1.0,
-                                    height: 1.4,
-                                    color: Colors.white,
+                              EmptySpace(multiple: 1.5),
+                              InkWell(
+                                onTap: () => clipboard.setClipboardStatus(
+                                    recoveryWords, true),
+                                child: Container(
+                                  height: 40,
+                                  width: 40,
+                                  alignment: Alignment.center,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10.0),
+                                      color: Theme.of(context).iconTheme.color),
+                                  child: Image.asset(
+                                    copy2,
+                                    height: 30.0,
+                                    width: 30.0,
                                   ),
                                 ),
                               ),
-                              SizedBox(
-                                height: 30.0,
-                              ),
-                              ButtonFilled(
-                                text: "YES",
-                                margin: EdgeInsets.all(0.0),
-                                fontSize: 18.0,
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              MnemonicMatchPage()));
-                                },
-                              ),
-                              SizedBox(
-                                height: 20.0,
-                              ),
-                              ButtonNotFilled(
-                                text: "No",
-                                margin: EdgeInsets.all(0.0),
-                                fontSize: 18.0,
-                                onTap: () {},
-                              ),
-                              SizedBox(
-                                height: 30.0,
-                              )
                             ],
                           ),
                         ),
-                      ),
-                    ],
+                        EmptySpace(multiple: 2.0),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16.0,
+                          ),
+                          child: CustomText(text: paragraph4),
+                        ),
+                        EmptySpace(multiple: 2.0),
+                        CustomButton(
+                          text: "YES",
+                          onPressed: () => Router.goToWidget(
+                            context: context,
+                            page: MnemonicMatchPage(),
+                          ),
+                        ),
+                        EmptySpace(multiple: 2.5),
+                        CustomButton(text: "NO", onPressed: () {}),
+                        EmptySpace(multiple: 2.0),
+                      ],
+                    ),
                   ),
                 ),
-                if (clipboard.getClipboardStatus)
-                  Center(
-                    child: CopyDialog(),
-                  )
               ],
-            );
-          },
-        ));
+            ),
+          ),
+          if (clipboard.getClipboardStatus)
+            Center(
+              child: CopyDialog(),
+            )
+        ],
+      ),
+    );
   }
 }
 

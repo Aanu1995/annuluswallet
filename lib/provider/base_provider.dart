@@ -1,3 +1,4 @@
+import 'package:annuluswallet/provider/info_display_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:annuluswallet/provider/dataProvider,.dart';
 import 'package:annuluswallet/provider/walletProvider.dart';
@@ -34,6 +35,9 @@ class BaseProvider extends StatelessWidget {
         ),
         ChangeNotifierProvider<LoadingProvider>.value(
           value: LoadingProvider(),
+        ),
+        ChangeNotifierProvider<ClipBoardProvider>.value(
+          value: ClipBoardProvider(),
         ),
       ],
       child: child,

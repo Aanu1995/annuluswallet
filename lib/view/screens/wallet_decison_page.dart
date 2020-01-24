@@ -92,26 +92,23 @@ class __DecisionPageState extends State<_DecisionPage> {
                       ),
                     ),
                     EmptySpace(multiple: 3.0),
-                    RichText(
-                      key: _infoPopupKey,
-                      text: TextSpan(
-                        children: [
-                          TextSpan(
-                            text: "MORE INFO ",
-                            style: primaryTextTheme.subtitle,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Text(
+                          "MORE INFO ",
+                          style: primaryTextTheme.subtitle,
+                        ),
+                        InkWell(
+                          child: Icon(
+                            Icons.info_outline,
+                            key: _infoPopupKey,
+                            size: 30.0,
                           ),
-                          WidgetSpan(
-                            alignment: PlaceholderAlignment.middle,
-                            child: InkWell(
-                              child: Icon(
-                                Icons.info_outline,
-                                size: 30.0,
-                              ),
-                              onTap: () => infoProvider.display(),
-                            ),
-                          ),
-                        ],
-                      ),
+                          onTap: () => infoProvider.display(),
+                        ),
+                      ],
                     ),
                   ],
                 ),

@@ -19,4 +19,12 @@ class Router {
     Navigator.pushReplacement(
         context, CustomPageRoute(builder: (context) => page));
   }
+
+  static removeWidget({BuildContext context, Widget page}) {
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (context) => page),
+      (Route<dynamic> route) => false,
+    );
+  }
 }

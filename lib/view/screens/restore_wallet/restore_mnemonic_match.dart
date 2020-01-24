@@ -1,3 +1,4 @@
+import 'package:annuluswallet/view/screens/new_wallet/create_password/create_password.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:annuluswallet/provider/walletProvider.dart';
@@ -5,7 +6,6 @@ import 'package:annuluswallet/view/screens/main/dashboard.dart';
 import 'package:annuluswallet/view/screens/main/login_screen.dart';
 import 'package:annuluswallet/view/screens/new_wallet/confirm_match.dart';
 import 'package:annuluswallet/view/screens/new_wallet/confirm_password.dart';
-import 'package:annuluswallet/view/screens/new_wallet/create_password.dart';
 import 'package:annuluswallet/view/screens/new_wallet/loading_wallet.dart';
 import 'package:annuluswallet/view/screens/new_wallet/micro_loading.dart';
 import 'package:annuluswallet/view/screens/new_wallet/mnemonic_intro.dart';

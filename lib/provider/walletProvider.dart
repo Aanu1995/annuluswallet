@@ -73,14 +73,6 @@ class WalletDetailsBottomAppBarProvider with ChangeNotifier {
 }
 
 class RapidsProvider with ChangeNotifier {
-  bool _clipBoard = false;
-  bool get getClipboardStatus =>
-      _clipBoard; // this is use to check if the dialog is true or not
-  set setClipboardStatus(bool value) {
-    _clipBoard = value;
-    notifyListeners();
-  }
-
   // This is for mnemonic phrase words
 
   List<String> _mnemonic = [];

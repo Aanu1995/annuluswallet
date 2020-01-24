@@ -5,3 +5,6 @@ export 'info_popup.dart';
 export 'empty_space.dart';
 export 'version_type.dart';
 export 'custom_drawers.dart';
+export 'fingerprint_popup.dart';
+export 'custom_text.dart';
+export 'clipboard_dialog.dart';

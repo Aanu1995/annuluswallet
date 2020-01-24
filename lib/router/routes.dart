@@ -1,4 +1,4 @@
-import 'package:annuluswallet/view/screens/new_wallet/create_password.dart';
+import 'package:annuluswallet/view/screens/new_wallet/create_password/create_password.dart';
 import 'package:annuluswallet/view/screens/new_wallet/important_page.dart';
 import 'package:annuluswallet/view/screens/wallet_decison_page.dart';
 import 'package:flutter/material.dart';

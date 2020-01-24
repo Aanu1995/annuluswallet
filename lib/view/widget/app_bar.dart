@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:annuluswallet/model/data.dart';
 import 'package:annuluswallet/model/images.dart';
 
 PreferredSize rapidAppBar(
@@ -335,7 +334,7 @@ PreferredSize drawerOnly(
 PreferredSize newWalletAppBar1(BuildContext context,
     {double height, Color color}) {
   return PreferredSize(
-    preferredSize: Size(MediaQuery.of(context).size.width, height ?? appheight),
+    preferredSize: Size(MediaQuery.of(context).size.width, height ?? 80),
     child: Container(
       color: color ?? Theme.of(context).appBarTheme.color,
       child: Center(
@@ -369,7 +368,7 @@ PreferredSize newWalletAppBar2(
   Function onTap,
 }) {
   return PreferredSize(
-    preferredSize: Size(MediaQuery.of(context).size.width, height ?? appheight),
+    preferredSize: Size(MediaQuery.of(context).size.width, height ?? 80),
     child: Container(
       color: Theme.of(context).appBarTheme.color,
       child: Center(
