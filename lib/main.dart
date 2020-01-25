@@ -1,3 +1,4 @@
+import 'package:annuluswallet/view/screens/new_wallet/mnemonic_match.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:annuluswallet/provider/base_provider.dart';
@@ -43,7 +44,8 @@ class MyApp extends StatelessWidget {
             color: ColorUtils.BOTTOM_APPBAR_COLOR,
           ),
         ),
-        routes: Routes.getRoutes,
+        home: MnemonicMatchPage(),
+        //routes: Routes.getRoutes,
       ),
     );
   }

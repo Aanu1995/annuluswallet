@@ -1,18 +1,20 @@
+import 'package:annuluswallet/router/router.dart';
+import 'package:annuluswallet/view/components/export_components.dart';
 import 'package:flutter/material.dart';
 import 'package:annuluswallet/model/colors.dart';
 import 'package:annuluswallet/view/screens/new_wallet/confirm_pin.dart';
 import 'package:annuluswallet/view/screens/pin_creation_screen/pin_code_view.dart';
-import 'package:annuluswallet/view/widget/app_bar.dart';
 
 class PinPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
       backgroundColor: darkBlue,
-      appBar: newWalletAppBar1(
-        context,
-        height: 60.0,
-        color: darkBlue,
+      appBar: AppBar(
+        elevation: 0.0,
+        backgroundColor: darkBlue,
+        leading: BackArrow(),
       ),
       body: SingleChildScrollView(
         child: PinCode(
@@ -22,48 +24,32 @@ class PinPage extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 Container(
+                  padding: EdgeInsets.only(left: 30.0),
                   alignment: Alignment.topLeft,
-                  margin: EdgeInsets.only(left: 16.0),
                   child: Text(
                     "Step 1 of 2",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20.0,
-                      letterSpacing: 1.0,
-                      color: Theme.of(context).iconTheme.color,
-                    ),
+                    style: theme.primaryTextTheme.title,
                   ),
                 ),
-                SizedBox(
-                  height: 20.0,
-                ),
-                Container(
-                  child: Text(
-                    "Create your 6 digit PIN",
-                    style: TextStyle(
-                      fontWeight: FontWeight.w300,
-                      fontSize: 20.0,
-                      letterSpacing: 1.0,
-                      color: Colors.white,
-                    ),
+                EmptySpace(multiple: 4.0),
+                Text(
+                  "Create your 6 digit PIN",
+                  style: theme.textTheme.title.copyWith(
+                    color: Colors.white,
+                    letterSpacing: 1.3,
+                    fontWeight: FontWeight.w300,
                   ),
                 ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height / 12.0,
-                ),
+                EmptySpace(multiple: 6.0)
               ],
             ),
           ),
           obscurePin: true, // to make pin * instead of number
           codeLength: 6,
-          onCodeFail: (code) {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => ConfirmPinPage(
-                          pin: code,
-                        )));
-          },
+          onCodeFail: (code) => Router.goToWidget(
+            context: context,
+            page: ConfirmPinPage(pin: code),
+          ),
         ),
       ),
     );

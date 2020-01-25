@@ -1,211 +1,90 @@
+import 'package:annuluswallet/provider/info_display_provider.dart';
+import 'package:annuluswallet/router/router.dart';
+import 'package:annuluswallet/view/components/empty_space.dart';
+import 'package:annuluswallet/view/components/export_components.dart';
 import 'package:flutter/material.dart';
 import 'package:annuluswallet/model/colors.dart';
 import 'package:annuluswallet/model/images.dart';
 import 'package:annuluswallet/view/screens/new_wallet/loading_wallet.dart';
+import 'package:provider/provider.dart';
 
-class PinCreatedSuccessfullyPage extends StatefulWidget {
-  @override
-  _PinCreatedSuccessfullyPageState createState() =>
-      _PinCreatedSuccessfullyPageState();
-}
-
-class _PinCreatedSuccessfullyPageState
-    extends State<PinCreatedSuccessfullyPage> {
-  bool isClicked = false;
+class PinCreatedSuccessfullyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    return ChangeNotifierProvider.value(
+      value: FingerprintPopupProvider(),
+      child: _PinCreatedSuccessfullyPage(),
+    );
+  }
+}
+
+class _PinCreatedSuccessfullyPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final fingerProvider = Provider.of<FingerprintPopupProvider>(context);
     return Scaffold(
       backgroundColor: darkBlue,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Expanded(
-            child: Center(
-              child: Text(
-                "Pin successfully created",
-                style: TextStyle(
-                  fontWeight: FontWeight.w400,
-                  fontSize: 22.0,
-                  letterSpacing: 1.0,
-                  color: lightGreen,
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Expanded(
+              child: Center(
+                child: Text(
+                  "Pin successfully created",
+                  style: theme.textTheme.title.copyWith(
+                    color: theme.iconTheme.color,
+                    letterSpacing: 1.3,
+                    fontWeight: FontWeight.w400,
+                  ),
                 ),
               ),
             ),
-          ),
-          Stack(
-            alignment: Alignment.bottomCenter,
-            children: <Widget>[
-              Column(
-                children: <Widget>[
-                  Text(
-                    "Finally, Would you like to set up your",
-                    style: TextStyle(
-                      fontWeight: FontWeight.w300,
-                      fontSize: 21.0,
-                      letterSpacing: 1.0,
-                      color: Colors.white,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 5.0,
-                  ),
-                  Text(
-                    "fingerprint ID login",
-                    style: TextStyle(
-                      fontWeight: FontWeight.w300,
-                      fontSize: 21.0,
-                      letterSpacing: 1.0,
-                      color: Colors.white,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 30.0,
-                  ),
-                  Image.asset(
-                    touchId,
-                    height: 80.0,
-                    width: 80.0,
-                  ),
-                  SizedBox(
-                    height: 20.0,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        isClicked = !isClicked;
-                      });
-                    },
-                    child: Container(
-                      margin: EdgeInsets.symmetric(
-                          vertical: 20.0, horizontal: 16.0),
-                      height: 60.0,
-                      decoration: BoxDecoration(
-                          color: Theme.of(context).iconTheme.color,
-                          borderRadius: BorderRadius.circular(10.0)),
-                      child: Center(
-                        child: Text(
-                          "YES",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16.0,
-                            letterSpacing: 2.0,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => LoadingWallet()),
-                      );
-                    },
-                    child: Container(
-                      margin: EdgeInsets.symmetric(horizontal: 16.0),
-                      height: 60.0,
-                      decoration: BoxDecoration(
-                          border: Border.all(
-                              color: Theme.of(context).iconTheme.color,
-                              width: 2.0),
-                          borderRadius: BorderRadius.circular(10.0)),
-                      child: Center(
-                        child: Text(
-                          "SET UP LATER",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16.0,
-                            letterSpacing: 2.0,
-                            color: Theme.of(context).iconTheme.color,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20.0,
-                  ),
-                ],
-              ),
-              isClicked
-                  ? Container(
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
+            Stack(
+              alignment: Alignment.bottomCenter,
+              children: <Widget>[
+                Column(
+                  children: <Widget>[
+                    Text(
+                      "Finally, Would you like to set up your fingerprint ID login",
+                      textAlign: TextAlign.center,
+                      style: theme.textTheme.title.copyWith(
                         color: Colors.white,
-                        borderRadius: BorderRadius.circular(10.0),
+                        letterSpacing: 1.5,
+                        height: 1.5,
+                        fontWeight: FontWeight.w300,
                       ),
-                      child: Container(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 20.0, vertical: 20.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(
-                              "Authenticate",
-                              style: TextStyle(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 17.0,
-                                letterSpacing: 1.5,
-                                color: Theme.of(context).appBarTheme.color,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 30.0,
-                            ),
-                            Container(
-                              alignment: Alignment.center,
-                              child: Column(
-                                children: <Widget>[
-                                  Image.asset(
-                                    touch,
-                                    height: 80.0,
-                                    width: 80.0,
-                                  ),
-                                  SizedBox(
-                                    height: 10.0,
-                                  ),
-                                  Text(
-                                    "Touch the fingerprint sensor",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 13.0,
-                                      letterSpacing: 0.7,
-                                      color:
-                                          Theme.of(context).appBarTheme.color,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            SizedBox(
-                              height: 30.0,
-                            ),
-                            FlatButton(
-                              onPressed: () {
-                                setState(() {
-                                  isClicked = !isClicked;
-                                });
-                              },
-                              child: Text(
-                                "CANCEL",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 16.0,
-                                  letterSpacing: 0.7,
-                                  color: Color(0xFF008877),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+                    ),
+                    EmptySpace(multiple: 5.0),
+                    Image.asset(
+                      touchId,
+                      height: 60.0,
+                      width: 60.0,
+                    ),
+                    EmptySpace(multiple: 2.5),
+                    EmptySpace(multiple: 5.0),
+                    CustomButton(
+                      text: "YES",
+                      onPressed: () => fingerProvider.display(),
+                    ),
+                    EmptySpace(multiple: 3.0),
+                    CustomOutlineButton(
+                      text: "SET UP LATER",
+                      onPressed: () => Router.goToWidget(
+                        context: context,
+                        page: LoadingWallet(),
                       ),
-                    )
-                  : Container()
-            ],
-          ),
-        ],
+                    ),
+                    EmptySpace(multiple: 2.5),
+                  ],
+                ),
+                if (fingerProvider.isDisplayed) FingerprintPopup()
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

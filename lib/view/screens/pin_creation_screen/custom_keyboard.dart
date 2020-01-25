@@ -100,8 +100,8 @@ class CustomKeyboardState extends State<CustomKeyboard> {
               children: <Widget>[
                 GestureDetector(
                   child: Container(
-                    height: 60,
-                    width: 115,
+                    height: 55,
+                    width: MediaQuery.of(context).size.width / 3.6,
                     alignment: Alignment.center,
                     child: Text(
                       "",
@@ -116,8 +116,8 @@ class CustomKeyboardState extends State<CustomKeyboard> {
                 GestureDetector(
                   onTap: () => widget.onBackPressed(),
                   child: Container(
-                      height: 60,
-                      width: 115,
+                      height: 55,
+                      width: MediaQuery.of(context).size.width / 3.6,
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
                           color: Colors.transparent,
@@ -146,8 +146,8 @@ class KeyBoard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: 60,
-        width: 115,
+        height: 55,
+        width: MediaQuery.of(context).size.width / 3.6,
         alignment: Alignment.center,
         decoration: BoxDecoration(
             color: Colors.transparent,

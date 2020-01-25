@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:countdown/countdown.dart';
+import 'package:annuluswallet/router/router.dart';
 import 'package:flutter/material.dart';
 import 'package:annuluswallet/model/images.dart';
 import 'package:annuluswallet/view/screens/new_wallet/wallet_created_successfully.dart';
@@ -16,76 +16,48 @@ class WalletKeyCreationSuccessful extends StatefulWidget {
 
 class _WalletKeyCreationSuccessfulState
     extends State<WalletKeyCreationSuccessful> {
-  double width = 0;
-  StreamSubscription<Duration> sub;
-  int time = 3000;
-  String value;
-
   @override
   void initState() {
     super.initState();
-    timer();
+    delay();
   }
 
-  timer() async {
-    CountDown cd = CountDown(Duration(milliseconds: time));
-    sub = cd.stream.listen(null);
-    sub.onData((Duration d) async {
-      print(time - d.inMilliseconds);
-      setState(() {
-        width =
-            ((time - d.inMilliseconds) * MediaQuery.of(context).size.width) /
-                time;
-      });
-    });
-
-    sub.onDone(() {
-      sub.cancel();
-      Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-              builder: (context) =>
-                  widget.page ?? WalletCreatedSuccessfullyPage()));
+  void delay() async {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await Future.delayed(
+        Duration(seconds: 2),
+      );
+      Router.goToReplacementWidget(
+          context: context, page: WalletCreatedSuccessfullyPage());
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Stack(
-      children: <Widget>[
-        Container(
-          alignment: Alignment.topCenter,
-          margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 4),
-          child: Column(
-            children: <Widget>[
-              Image.asset(
-                private,
+      body: Container(
+        alignment: Alignment.topCenter,
+        margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 4),
+        child: Column(
+          children: <Widget>[
+            Image.asset(
+              private,
+            ),
+            SizedBox(
+              height: 30.0,
+            ),
+            Text(
+              widget.text ?? "Successfully created private key...",
+              style: TextStyle(
+                fontWeight: FontWeight.w400,
+                fontSize: 18.0,
+                letterSpacing: 1.0,
+                color: widget.color ?? Colors.white,
               ),
-              SizedBox(
-                height: 30.0,
-              ),
-              Text(
-                widget.text ?? "Successfully created private key...",
-                style: TextStyle(
-                  fontWeight: FontWeight.w400,
-                  fontSize: 18.0,
-                  letterSpacing: 1.0,
-                  color: widget.color ?? Colors.white,
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
-        Align(
-          alignment: Alignment.bottomLeft,
-          child: Container(
-            height: 10.0,
-            width: width,
-            color: Color(0xFF56c549),
-          ),
-        )
-      ],
-    ));
+      ),
+    );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:annuluswallet/view/components/export_components.dart';
 import 'package:flutter/material.dart';
 import 'package:annuluswallet/model/colors.dart';
 import 'package:annuluswallet/view/screens/new_wallet/pin_created_successfully.dart';
@@ -9,12 +10,13 @@ class ConfirmPinPage extends StatelessWidget {
   ConfirmPinPage({this.pin});
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
       backgroundColor: darkBlue,
-      appBar: newWalletAppBar1(
-        context,
-        height: 60.0,
-        color: darkBlue,
+      appBar: AppBar(
+        elevation: 0.0,
+        backgroundColor: darkBlue,
+        leading: BackArrow(),
       ),
       body: SingleChildScrollView(
           child: Column(
@@ -27,16 +29,11 @@ class ConfirmPinPage extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   Container(
+                    padding: EdgeInsets.only(left: 30.0),
                     alignment: Alignment.topLeft,
-                    margin: EdgeInsets.only(left: 16.0),
                     child: Text(
-                      "Step 2 of 2",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20.0,
-                        letterSpacing: 1.0,
-                        color: Theme.of(context).iconTheme.color,
-                      ),
+                      "Step 1 of 2",
+                      style: theme.primaryTextTheme.title,
                     ),
                   ),
                   SizedBox(
@@ -45,17 +42,14 @@ class ConfirmPinPage extends StatelessWidget {
                   Container(
                     child: Text(
                       "Re-enter your 6 digit PIN",
-                      style: TextStyle(
-                        fontWeight: FontWeight.w300,
-                        fontSize: 20.0,
-                        letterSpacing: 1.0,
+                      style: theme.textTheme.title.copyWith(
                         color: Colors.white,
+                        letterSpacing: 1.3,
+                        fontWeight: FontWeight.w300,
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height / 12.0,
-                  ),
+                  EmptySpace(multiple: 6.0),
                 ],
               ),
             ),

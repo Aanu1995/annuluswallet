@@ -1,3 +1,4 @@
+import 'package:annuluswallet/view/components/mnemonicSelectonBox.dart';
 import 'package:annuluswallet/view/screens/new_wallet/create_password/create_password.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -14,7 +15,6 @@ import 'package:annuluswallet/view/screens/new_wallet/wallet_created_successfull
 import 'package:annuluswallet/view/screens/showcase/showcase.dart';
 import 'package:annuluswallet/view/widget/app_bar.dart';
 import 'package:annuluswallet/view/widget/common.dart';
-import 'package:annuluswallet/view/widget/mnemonicSelectonBox.dart';
 
 class RestoreMnemonicMatchPage extends StatefulWidget {
   @override
@@ -248,7 +248,6 @@ class _RestoreMnemonicMatchPageState extends State<RestoreMnemonicMatchPage> {
                                                 MaterialPageRoute(
                                                     builder: (context) =>
                                                         ConfirmMatch(
-                                                          provider: provider,
                                                           page:
                                                               WalletKeyCreationSuccessful(
                                                             page:
