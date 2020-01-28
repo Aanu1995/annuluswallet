@@ -60,7 +60,8 @@ class __MnemonicMatchPageState extends State<_MnemonicMatchPage> {
   Widget build(BuildContext context) {
     final provider = Provider.of<RapidsProvider>(context);
     final theme = Theme.of(context);
-    final infoProvider = Provider.of<InfoDisplayProvider>(context);
+    final infoProvider =
+        Provider.of<InfoDisplayProvider>(context, listen: false);
     return Stack(
       children: <Widget>[
         Container(
@@ -75,7 +76,7 @@ class __MnemonicMatchPageState extends State<_MnemonicMatchPage> {
                   style: theme.primaryTextTheme.title,
                 ),
               ),
-              EmptySpace(multiple: 2.5),
+              const EmptySpace(multiple: 2.5),
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
@@ -103,7 +104,7 @@ class __MnemonicMatchPageState extends State<_MnemonicMatchPage> {
                         ],
                       ),
                       HeaderText(text: "mnemonic phrase"),
-                      EmptySpace(multiple: 3.8),
+                      const EmptySpace(multiple: 3.8),
                       Container(
                         width: MediaQuery.of(context).size.width,
                         padding: EdgeInsets.all(8.0),
@@ -125,7 +126,7 @@ class __MnemonicMatchPageState extends State<_MnemonicMatchPage> {
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                       ),
-                      EmptySpace(),
+                      const EmptySpace(),
                       Container(
                         width: MediaQuery.of(context).size.width,
                         alignment: Alignment.center,
@@ -138,15 +139,15 @@ class __MnemonicMatchPageState extends State<_MnemonicMatchPage> {
                           ],
                         ),
                       ),
-                      EmptySpace(multiple: 3.0),
+                      const EmptySpace(multiple: 3.0),
                       CustomButton(
-                        text: "Submit",
+                        text: "SUBMIT",
                         onPressed: () => Router.removeWidget(
                           context: context,
                           page: ConfirmMatch(),
                         ),
                       ),
-                      EmptySpace(multiple: 3.8),
+                      const EmptySpace(multiple: 3.8),
                     ],
                   ),
                 ),
@@ -154,12 +155,17 @@ class __MnemonicMatchPageState extends State<_MnemonicMatchPage> {
             ],
           ),
         ),
-        infoProvider.isDisplayed
-            ? ShowCase(
+        Consumer<InfoDisplayProvider>(
+          builder: (context, infoProvider, child) {
+            if (infoProvider.isDisplayed) {
+              return ShowCase(
                 offset: _infoOffset,
                 info: _info,
-              )
-            : Offstage()
+              );
+            }
+            return Offstage();
+          },
+        )
       ],
     );
   }

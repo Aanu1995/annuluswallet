@@ -1,11 +1,12 @@
-import 'package:annuluswallet/router/router.dart';
-import 'package:annuluswallet/view/screens/new_wallet/successfully_created_wallet_key.dart';
 import 'package:flutter/material.dart';
+
+import 'package:annuluswallet/router/router.dart';
 import 'package:annuluswallet/model/images.dart';
+import 'package:annuluswallet/view/screens/new_wallet/successfully_created_wallet_key.dart';
 
 class ConfirmMatch extends StatefulWidget {
-  final page;
-  ConfirmMatch({this.page});
+  final Widget page;
+  const ConfirmMatch({this.page});
   @override
   _ConfirmMatchState createState() => _ConfirmMatchState();
 }
@@ -23,7 +24,7 @@ class _ConfirmMatchState extends State<ConfirmMatch> {
         Duration(seconds: 2),
       );
       Router.goToReplacementWidget(
-          context: context, page: WalletKeyCreationSuccessful());
+          context: context, page: widget.page ?? WalletKeyCreationSuccessful());
     });
   }
 

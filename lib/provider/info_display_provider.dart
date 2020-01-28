@@ -2,11 +2,20 @@ import 'package:clipboard_manager/clipboard_manager.dart';
 import 'package:flutter/material.dart';
 
 class InfoDisplayProvider with ChangeNotifier {
+  Offset _infoOffset = Offset(0.0, 0.0);
+
   bool _isDisplayed = false;
+
   bool get isDisplayed => _isDisplayed;
   void display() {
     _isDisplayed = !_isDisplayed;
     notifyListeners();
+  }
+
+  Offset get infoOffset => _infoOffset;
+
+  set setOffset(Offset value) {
+    _infoOffset = value;
   }
 }
 

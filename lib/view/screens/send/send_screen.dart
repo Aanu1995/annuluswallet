@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+
 import 'package:provider/provider.dart';
+
 import 'package:annuluswallet/provider/walletProvider.dart';
-import 'package:annuluswallet/view/screens/new_wallet/successfully_created_wallet_key.dart';
 import 'package:annuluswallet/view/screens/receive/receive.dart';
 import 'package:annuluswallet/view/screens/send/send_wallet.dart';
 import 'package:annuluswallet/view/widget/app_bar.dart';
 import 'package:annuluswallet/view/widget/get_wallet.dart';
 import 'package:annuluswallet/view/widget/routes.dart';
+import 'package:annuluswallet/view/screens/new_wallet/successfully_created_wallet_key.dart';
 
 class SendPage extends StatelessWidget {
   @override
@@ -64,14 +66,15 @@ class FromWallet extends StatelessWidget {
             wallet: list[i],
             onTap: () {
               push(
-                  context: context,
-                  page: WalletKeyCreationSuccessful(
-                    color: Theme.of(context).iconTheme.color,
-                    page: SendWallet(
-                      wallet: list[i],
-                    ),
-                    text: "Loading Send Payment...",
-                  ));
+                context: context,
+                page: WalletKeyCreationSuccessful(
+                  color: Theme.of(context).iconTheme.color,
+                  page: SendWallet(
+                    wallet: list[i],
+                  ),
+                  text: "Loading Send Payment...",
+                ),
+              );
             },
           )
       ],

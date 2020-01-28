@@ -1,11 +1,12 @@
-import 'package:annuluswallet/router/router.dart';
-import 'package:annuluswallet/view/components/export_components.dart';
-import 'package:annuluswallet/view/screens/new_wallet/create_password/components/header_error_message.dart';
 import 'package:flutter/material.dart';
+
 import 'package:annuluswallet/model/images.dart';
 import 'package:annuluswallet/view/screens/main/dashboard.dart';
 import 'package:provider/provider.dart';
 import 'package:annuluswallet/provider/info_display_provider.dart';
+import 'package:annuluswallet/router/router.dart';
+import 'package:annuluswallet/view/components/export_components.dart';
+import 'package:annuluswallet/view/screens/new_wallet/create_password/components/header_error_message.dart';
 
 class LoginScreen extends StatelessWidget {
   final page;
@@ -55,7 +56,7 @@ class __LoginScreenState extends State<_LoginScreen> {
             SingleChildScrollView(
               child: Column(
                 children: <Widget>[
-                  EmptySpace(multiple: 4.0),
+                  const EmptySpace(multiple: 4.0),
                   Text(
                     "Welcome back",
                     style: theme.textTheme.title.copyWith(
@@ -64,7 +65,7 @@ class __LoginScreenState extends State<_LoginScreen> {
                       letterSpacing: 1.3,
                     ),
                   ),
-                  EmptySpace(multiple: 6.0),
+                  const EmptySpace(multiple: 6.0),
                   TextField(
                     controller: passwordController,
                     obscureText: isVisible,
@@ -102,9 +103,9 @@ class __LoginScreenState extends State<_LoginScreen> {
                     ),
                   ),
                   if (isValidate == false) EmptyFieldMessage(),
-                  EmptySpace(multiple: 10.0),
+                  const EmptySpace(multiple: 10.0),
                   CustomButton(text: "LOGIN", onPressed: onPressed),
-                  EmptySpace(),
+                  const EmptySpace(),
                   Align(
                     alignment: Alignment.topRight,
                     child: FlatButton(
@@ -117,7 +118,7 @@ class __LoginScreenState extends State<_LoginScreen> {
                       onPressed: () {},
                     ),
                   ),
-                  EmptySpace(multiple: 5.0),
+                  const EmptySpace(multiple: 5.0),
                   InkWell(
                     child: Image.asset(
                       touchId,

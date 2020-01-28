@@ -1,12 +1,12 @@
-import 'package:annuluswallet/provider/info_display_provider.dart';
-import 'package:annuluswallet/router/router.dart';
+import 'package:annuluswallet/view/screens/new_wallet/micro_loading.dart';
 import 'package:flutter/material.dart';
 
+import 'package:annuluswallet/provider/info_display_provider.dart';
+import 'package:annuluswallet/router/router.dart';
 import 'package:annuluswallet/model/images.dart';
-import 'package:annuluswallet/view/screens/new_wallet/micro_loading.dart';
-import 'package:annuluswallet/view/screens/restore_wallet/restore_mnemonic_match.dart';
 import 'package:annuluswallet/view/widget/routes.dart';
 import 'package:annuluswallet/view/components/export_components.dart';
+import 'package:annuluswallet/view/screens/restore_wallet/restore_mnemonic_match.dart';
 import 'package:provider/provider.dart';
 
 class WalletDecisionPage extends StatelessWidget {
@@ -31,28 +31,9 @@ class WalletDecisionPage extends StatelessWidget {
   }
 }
 
-class _DecisionPage extends StatefulWidget {
-  @override
-  __DecisionPageState createState() => __DecisionPageState();
-}
-
-class __DecisionPageState extends State<_DecisionPage> {
-  final GlobalKey _infoPopupKey = GlobalKey();
-  Offset _infoOffset = Offset(0.0, 0.0);
-
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      RenderBox infoButton = _infoPopupKey.currentContext.findRenderObject();
-      _infoOffset = infoButton.localToGlobal(Offset.zero);
-    });
-  }
-
+class _DecisionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final primaryTextTheme = Theme.of(context).primaryTextTheme;
-    final infoProvider = Provider.of<InfoDisplayProvider>(context);
     return Stack(
       fit: StackFit.expand,
       children: <Widget>[
@@ -92,35 +73,67 @@ class __DecisionPageState extends State<_DecisionPage> {
                       ),
                     ),
                     EmptySpace(multiple: 3.0),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        Text(
-                          "MORE INFO ",
-                          style: primaryTextTheme.subtitle,
-                        ),
-                        InkWell(
-                          child: Icon(
-                            Icons.info_outline,
-                            key: _infoPopupKey,
-                            size: 30.0,
-                          ),
-                          onTap: () => infoProvider.display(),
-                        ),
-                      ],
-                    ),
+                    const _Information(),
                   ],
                 ),
               ),
             ),
           ],
         ),
-        infoProvider.isDisplayed
-            ? InfoPopup(
-                offset: _infoOffset,
-              )
-            : Offstage()
+        Consumer<InfoDisplayProvider>(
+          builder: (context, infoProvider, child) {
+            if (infoProvider.isDisplayed) {
+              return InfoPopup(
+                offset: infoProvider.infoOffset,
+              );
+            }
+            return Offstage();
+          },
+        )
+      ],
+    );
+  }
+}
+
+class _Information extends StatefulWidget {
+  const _Information({Key key}) : super(key: key);
+
+  @override
+  __InformationState createState() => __InformationState();
+}
+
+class __InformationState extends State<_Information> {
+  final GlobalKey _infoPopupKey = GlobalKey();
+  InfoDisplayProvider infoProvider;
+  @override
+  void initState() {
+    super.initState();
+    infoProvider = Provider.of<InfoDisplayProvider>(context, listen: false);
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      RenderBox infoButton = _infoPopupKey.currentContext.findRenderObject();
+      infoProvider.setOffset = infoButton.localToGlobal(Offset.zero);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final primaryTextTheme = Theme.of(context).primaryTextTheme;
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        Text(
+          "MORE INFO ",
+          style: primaryTextTheme.subtitle,
+        ),
+        InkWell(
+          child: Icon(
+            Icons.info_outline,
+            key: _infoPopupKey,
+            size: 30.0,
+          ),
+          onTap: () => infoProvider.display(),
+        ),
       ],
     );
   }

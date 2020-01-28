@@ -49,7 +49,7 @@ class InfoPopup extends StatelessWidget {
                     style: theme.primaryTextTheme.subtitle
                         .copyWith(color: Colors.black, height: 1.4),
                   ),
-                  EmptySpace(multiple: 3.0),
+                  const EmptySpace(multiple: 3.0),
                   InkWell(
                     child: Text(
                       "CLOSE",
@@ -60,7 +60,7 @@ class InfoPopup extends StatelessWidget {
                     ),
                     onTap: () => infoProvider.display(),
                   ),
-                  EmptySpace(multiple: 0.5),
+                  const EmptySpace(multiple: 0.5),
                 ],
               ),
             ),
@@ -116,7 +116,7 @@ class ShowCase extends StatelessWidget {
                   style: theme.primaryTextTheme.subtitle
                       .copyWith(color: Colors.black, height: 1.4),
                 ),
-                EmptySpace(multiple: 3.0),
+                const EmptySpace(multiple: 3.0),
                 InkWell(
                   child: Text(
                     "CLOSE",
@@ -127,7 +127,7 @@ class ShowCase extends StatelessWidget {
                   ),
                   onTap: () => infoProvider.display(),
                 ),
-                EmptySpace(multiple: 0.5),
+                const EmptySpace(multiple: 0.5),
               ],
             ),
           ),

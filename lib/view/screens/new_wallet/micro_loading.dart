@@ -23,17 +23,20 @@ class _MicroLoadingState extends State<MicroLoading> {
   }
 
   void delay() async {
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await Future.delayed(
-        Duration(seconds: 2),
-      );
-      Router.goToReplacementWidget(
-        context: context,
-        page: LoginScreen(
-          page: MnemonicIntroPage(),
-        ),
-      );
-    });
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) async {
+        await Future.delayed(
+          Duration(seconds: 2),
+        );
+        Router.goToReplacementWidget(
+          context: context,
+          page: widget.page ??
+              LoginScreen(
+                page: MnemonicIntroPage(),
+              ),
+        );
+      },
+    );
   }
 
   @override
