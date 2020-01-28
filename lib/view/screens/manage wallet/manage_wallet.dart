@@ -1,3 +1,4 @@
+import 'package:annuluswallet/router/router.dart';
 import 'package:flutter/material.dart';
 import 'package:annuluswallet/model/images.dart';
 import 'package:annuluswallet/view/screens/manage%20wallet/create_new_wallet.dart';
@@ -5,7 +6,6 @@ import 'package:annuluswallet/view/screens/receive/receive.dart';
 import 'package:annuluswallet/view/screens/transfer/transfer_page.dart';
 import 'package:annuluswallet/view/widget/app_bar.dart';
 import 'package:annuluswallet/view/widget/common.dart';
-import 'package:annuluswallet/view/widget/routes.dart';
 
 class ManageWallet extends StatefulWidget {
   @override
@@ -42,9 +42,10 @@ class _ManageWalletState extends State<ManageWallet> {
                 text: "CREATE NEW WALLET",
                 height: 45.0,
                 margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
-                onTap: () {
-                  push(context: context, page: CreateNewWallet());
-                },
+                onTap: () => Router.goToWidget(
+                  context: context,
+                  page: CreateNewWallet(),
+                ),
               ),
               isWalletExceeded
                   ? Column(

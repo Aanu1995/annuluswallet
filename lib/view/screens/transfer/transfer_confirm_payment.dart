@@ -1,3 +1,4 @@
+import 'package:annuluswallet/router/router.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:annuluswallet/model/colors.dart';
@@ -8,7 +9,6 @@ import 'package:annuluswallet/view/screens/receive/receive.dart';
 import 'package:annuluswallet/view/screens/transfer/function_widget.dart';
 import 'package:annuluswallet/view/screens/transfer/payment_complete.dart';
 import 'package:annuluswallet/view/widget/common.dart';
-import 'package:annuluswallet/view/widget/routes.dart';
 
 class TransferConfirmPayment extends StatelessWidget {
   final Wallet fromWallet;
@@ -179,17 +179,16 @@ class TransferConfirmPayment extends StatelessWidget {
                 text: "CONFIRM PAYMENT",
                 height: 50.0,
                 margin: EdgeInsets.all(0.0),
-                onTap: () {
-                  push(
-                      context: context,
-                      page: WalletKeyCreationSuccessful(
-                        color: Theme.of(context).iconTheme.color,
-                        page: PaymentComplete(
-                          isSend: false,
-                        ),
-                        text: "Loading Send Payment...",
-                      ));
-                },
+                onTap: () => Router.goToWidget(
+                  context: context,
+                  page: WalletKeyCreationSuccessful(
+                    color: Theme.of(context).iconTheme.color,
+                    page: PaymentComplete(
+                      isSend: false,
+                    ),
+                    text: "Loading Send Payment...",
+                  ),
+                ),
               ),
               SizedBox(
                 height: 20.0,

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+
 import 'package:majascan/majascan.dart';
 import 'package:provider/provider.dart';
+
 import 'package:annuluswallet/model/colors.dart';
 import 'package:annuluswallet/model/images.dart';
 import 'package:annuluswallet/provider/walletProvider.dart';
@@ -10,8 +12,8 @@ import 'package:annuluswallet/view/screens/send/send_confirm_payment.dart';
 import 'package:annuluswallet/view/screens/transfer/function_widget.dart';
 import 'package:annuluswallet/view/widget/app_bar.dart';
 import 'package:annuluswallet/view/widget/common.dart';
-import 'package:annuluswallet/view/widget/routes.dart';
 import 'package:annuluswallet/view/widget/selected_wallet.dart';
+import 'package:annuluswallet/router/router.dart';
 
 class SendWallet extends StatefulWidget {
   final Wallet wallet;
@@ -362,16 +364,15 @@ class _SendWalletState extends State<SendWallet> {
                           text: "REQUEST PAYMENT",
                           height: 50.0,
                           margin: EdgeInsets.all(0.0),
-                          onTap: () {
-                            push(
-                                context: context,
-                                page: SendConfirmPayment(
-                                  fromWallet: widget.wallet,
-                                  address: addressController.text,
-                                  label: labelController.text,
-                                  amount: amountController.text,
-                                ));
-                          },
+                          onTap: () => Router.goToWidget(
+                            context: context,
+                            page: SendConfirmPayment(
+                              fromWallet: widget.wallet,
+                              address: addressController.text,
+                              label: labelController.text,
+                              amount: amountController.text,
+                            ),
+                          ),
                         ),
                         SizedBox(
                           height: 20.0,

@@ -1,3 +1,5 @@
+import 'package:annuluswallet/router/router.dart';
+import 'package:annuluswallet/view/components/custom_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:annuluswallet/provider/walletProvider.dart';
 import 'package:annuluswallet/view/screens/receive/receive.dart';
@@ -5,7 +7,6 @@ import 'package:annuluswallet/view/screens/transfer/function_widget.dart';
 import 'package:annuluswallet/view/screens/transfer/transfer_confirm_payment.dart';
 import 'package:annuluswallet/view/widget/app_bar.dart';
 import 'package:annuluswallet/view/widget/common.dart';
-import 'package:annuluswallet/view/widget/routes.dart';
 import 'package:annuluswallet/view/widget/selected_wallet.dart';
 import 'package:provider/provider.dart';
 
@@ -264,19 +265,16 @@ class _FromWalletToSendWalletState extends State<FromWalletToSendWallet> {
                   SizedBox(
                     height: 50.0,
                   ),
-                  ButtonFilled(
+                  CustomButton(
                     text: "REQUEST PAYMENT",
-                    height: 60.0,
-                    margin: EdgeInsets.all(0.0),
-                    onTap: () {
-                      push(
-                          context: context,
-                          page: TransferConfirmPayment(
-                            fromWallet: widget.fromWallet,
-                            toWallet: widget.toWallet,
-                            amount: amountController.text,
-                          ));
-                    },
+                    onPressed: () => Router.goToWidget(
+                      context: context,
+                      page: TransferConfirmPayment(
+                        fromWallet: widget.fromWallet,
+                        toWallet: widget.toWallet,
+                        amount: amountController.text,
+                      ),
+                    ),
                   ),
                   SizedBox(
                     height: 20.0,

@@ -64,7 +64,7 @@ class _DecisionPage extends StatelessWidget {
                     EmptySpace(multiple: 2.0),
                     CustomButton(
                       text: "RESTORE A WALLET",
-                      onPressed: () => pushAndRemoveUntil(
+                      onPressed: () => Router.goToWidget(
                         context: context,
                         page: MicroLoading(
                           text: "Welcome back...",

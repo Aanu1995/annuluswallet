@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class DashboardProvider {
-  int _selectedIndex = 1; //This is to know the selected item in the drawer
+  int _selectedIndex = 0; //This is to know the selected item in the drawer
 
   int get selectedItem =>
       _selectedIndex; //This gets the selected index in the drawer

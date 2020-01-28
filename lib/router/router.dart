@@ -27,4 +27,8 @@ class Router {
       (Route<dynamic> route) => false,
     );
   }
+
+  static goBack({BuildContext context}) {
+    Navigator.pop(context);
+  }
 }

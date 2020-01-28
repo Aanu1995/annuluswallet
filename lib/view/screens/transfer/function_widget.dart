@@ -1,6 +1,6 @@
+import 'package:annuluswallet/view/widget/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:annuluswallet/provider/walletProvider.dart';
-import 'package:annuluswallet/view/widget/routes.dart';
 
 class TransferWidgetFunction {
   cancelPayment({BuildContext context, DashboardProvider provider}) {

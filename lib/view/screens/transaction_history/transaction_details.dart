@@ -325,10 +325,13 @@ class TransactionDetails extends StatelessWidget {
                   SizedBox(
                     height: 12.0,
                   ),
-                  ButtonNotFilled(
-                      text: "CLOSE",
-                      onTap: () =>
-                          gotoDashBoard(context: context, provider: provider))
+                  CustomOutlineButton(
+                    text: "CLOSE",
+                    onPressed: () => gotoDashBoard(
+                      context: context,
+                      provider: provider,
+                    ),
+                  )
                 ],
               ),
             ),
