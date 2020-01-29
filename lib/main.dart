@@ -45,8 +45,8 @@ class MyApp extends StatelessWidget {
             color: ColorUtils.BOTTOM_APPBAR_COLOR,
           ),
         ),
-        home: DashBoardPage(),
-        // routes: Routes.getRoutes,
+      //home: DashBoardPage(),
+         routes: Routes.getRoutes,
       ),
     );
   }
