@@ -1,3 +1,4 @@
+import 'package:annuluswallet/view/components/export_components.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:annuluswallet/model/images.dart';
@@ -45,7 +46,10 @@ class _TransactionPageStateState extends State<TransactionPageState>
         return Scaffold(
           key: _globalKey,
           appBar: provider.selectedItem == 0
-              ? rapidAppBar(context: context, globalKey: _globalKey)
+              ? PreferredSize(
+                  preferredSize: Size(double.maxFinite, 80.0),
+                  child: DashboardAppBar(globalKey: _globalKey),
+                )
               : rapidPageAppBar2(
                   size: 30.0,
                   image: leftArrow,

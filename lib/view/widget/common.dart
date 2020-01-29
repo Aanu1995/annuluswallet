@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:annuluswallet/model/images.dart';
 
 class ButtonFilled extends StatelessWidget {
   final String text;

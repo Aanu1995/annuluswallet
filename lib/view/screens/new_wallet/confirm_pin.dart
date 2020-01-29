@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:annuluswallet/model/colors.dart';
 import 'package:annuluswallet/view/screens/new_wallet/pin_created_successfully.dart';
 import 'package:annuluswallet/view/screens/pin_creation_screen/pin_code_view.dart';
-import 'package:annuluswallet/view/widget/app_bar.dart';
 
 class ConfirmPinPage extends StatelessWidget {
   final String pin;

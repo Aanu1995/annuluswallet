@@ -44,6 +44,7 @@ class TransactionHistoryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
+      padding: EdgeInsets.zero,
       children: <Widget>[
         Container(
           height: 100.0,

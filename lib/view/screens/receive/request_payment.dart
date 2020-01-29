@@ -3,7 +3,6 @@ import 'package:annuluswallet/view/components/export_components.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_money_formatter/flutter_money_formatter.dart';
 import 'package:provider/provider.dart';
-import 'package:annuluswallet/provider/walletProvider.dart';
 import 'package:annuluswallet/view/screens/receive/payment.dart';
 import 'package:annuluswallet/view/screens/receive/receive.dart';
 import 'package:annuluswallet/view/widget/app_bar.dart';

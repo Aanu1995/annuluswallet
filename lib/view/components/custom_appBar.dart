@@ -1,5 +1,8 @@
-import 'package:annuluswallet/model/images.dart';
+import 'package:annuluswallet/view/components/empty_space.dart';
 import 'package:flutter/material.dart';
+
+import 'package:annuluswallet/model/images.dart';
+import 'package:annuluswallet/router/router.dart';
 
 class AppBarLogo extends StatelessWidget {
   @override
@@ -76,6 +79,125 @@ class AppBarDrawerLogo extends StatelessWidget {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class DashboardAppBar extends StatelessWidget {
+  final globalKey;
+  const DashboardAppBar({this.globalKey});
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Theme.of(context).appBarTheme.color,
+      child: SafeArea(
+        child: Container(
+          padding: const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0),
+          child: Stack(
+            children: <Widget>[
+              Align(
+                alignment: Alignment.topCenter,
+                child: Image.asset(
+                  logo,
+                  width: 124,
+                  height: 42,
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  InkWell(
+                    onTap: () {
+                      globalKey.currentState.openDrawer();
+                    },
+                    child: Row(
+                      children: <Widget>[
+                        Image.asset(
+                          drawer,
+                          height: 30.0,
+                          color: Theme.of(context).iconTheme.color,
+                          width: 30.0,
+                        ),
+                        SizedBox(
+                          width: 12.0,
+                        ),
+                        Container(
+                          height: 24.0,
+                          width: 30.0,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10.0),
+                            color: Color(0xFFff5f71),
+                          ),
+                          child: Center(
+                            child: Text(
+                              "2",
+                              style:
+                                  Theme.of(context).primaryTextTheme.subtitle,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {},
+                    child: Image.asset(
+                      lock,
+                      height: 30,
+                      width: 30.0,
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class TransactionAppBar extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final primaryTheme = Theme.of(context).primaryTextTheme;
+    return Container(
+      color: Theme.of(context).appBarTheme.color,
+      child: SafeArea(
+        child: Container(
+          padding: EdgeInsets.only(
+            top: 8.0,
+            left: 8.0,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              InkWell(
+                child: Image.asset(
+                  leftArrow,
+                  color: Theme.of(context).iconTheme.color,
+                  height: 30.0,
+                  width: 30.0,
+                ),
+                onTap: () => Router.goBack(context: context),
+              ),
+              Spacer(),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    "All Transactions",
+                    style: primaryTheme.title.copyWith(color: Colors.white),
+                  ),
+                  EmptySpace(),
+                  Image.asset(logo2, height: 50.0, width: 50.0),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

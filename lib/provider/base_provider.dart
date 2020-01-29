@@ -12,9 +12,6 @@ class BaseProvider extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<BottomAppBarProvider>.value(
-          value: BottomAppBarProvider(),
-        ),
         ChangeNotifierProvider<WalletDetailProvider>.value(
           value: WalletDetailProvider(),
         ),

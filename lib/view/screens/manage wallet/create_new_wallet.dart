@@ -157,7 +157,6 @@ class _CreateNewWalletState extends State<CreateNewWallet> {
   }
 
   createWalletButton() async {
-    LoadingProvider loadingProvider = Provider.of<LoadingProvider>(context);
     if (_controller.text.length > 5) {}
   }
 }
