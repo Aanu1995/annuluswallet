@@ -13,8 +13,12 @@ import 'package:annuluswallet/view/widget/common.dart';
 class TransferConfirmPayment extends StatelessWidget {
   final Wallet fromWallet;
   final Wallet toWallet;
-  String amount = "";
-  TransferConfirmPayment({this.fromWallet, this.toWallet, this.amount});
+  final String amount;
+  const TransferConfirmPayment({
+    this.fromWallet,
+    this.toWallet,
+    this.amount = "",
+  });
 
   final Color color = Colors.black;
 

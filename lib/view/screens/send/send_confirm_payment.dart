@@ -10,10 +10,15 @@ import 'package:annuluswallet/view/widget/common.dart';
 
 class SendConfirmPayment extends StatelessWidget {
   final Wallet fromWallet;
-  String address = "";
-  String amount = "";
-  String label = "";
-  SendConfirmPayment({this.fromWallet, this.address, this.amount, this.label});
+  final String address;
+  final String amount;
+  final String label;
+  const SendConfirmPayment({
+    this.fromWallet,
+    this.address = "",
+    this.amount = "",
+    this.label = "",
+  });
 
   final Color color = Colors.black;
 

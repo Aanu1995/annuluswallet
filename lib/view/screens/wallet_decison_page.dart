@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:annuluswallet/provider/info_display_provider.dart';
 import 'package:annuluswallet/router/router.dart';
 import 'package:annuluswallet/model/images.dart';
-import 'package:annuluswallet/view/widget/routes.dart';
 import 'package:annuluswallet/view/components/export_components.dart';
 import 'package:annuluswallet/view/screens/restore_wallet/restore_mnemonic_match.dart';
 import 'package:provider/provider.dart';

@@ -3,27 +3,22 @@ import 'package:annuluswallet/view/components/export_components.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:annuluswallet/model/images.dart';
 import 'package:annuluswallet/provider/walletProvider.dart';
-import 'package:annuluswallet/view/widget/app_bar.dart';
-import 'package:annuluswallet/view/widget/common.dart';
 import 'package:annuluswallet/view/widget/routes.dart';
 
 class TransactionDetails extends StatelessWidget {
-  String transactionId =
+  final String transactionId =
       "Rw34466osjSJA7Z1gdjdmhdnjjdkdhdjjdjkmasdkkd10ca8049417acerys";
 
   @override
   Widget build(BuildContext context) {
     DashboardProvider provider = Provider.of<DashboardProvider>(context);
     final clipboard = Provider.of<ClipBoardProvider>(context);
+    final textTheme = Theme.of(context).primaryTextTheme;
     return Scaffold(
-      appBar: rapidPageAppBar2(
-        context: context,
-        appTitle: "Mobile Wallet",
-        image: leftArrow,
-        size: 30.0,
-        onTap: () => Navigator.pop(context),
+      appBar: PreferredSize(
+        preferredSize: Size(double.maxFinite, 80),
+        child: TransactionAppBar(title: "Mobile Wallet"),
       ),
       body: Stack(
         children: <Widget>[
@@ -291,40 +286,32 @@ class TransactionDetails extends StatelessWidget {
                   ),
                   Align(
                     alignment: Alignment.topRight,
-                    child: GestureDetector(
+                    child: InkWell(
                       onTap: () =>
                           clipboard.setClipboardStatus(transactionId, true),
                       child: Container(
-                        height: 50.0,
-                        width: 90,
+                        width: 70.0,
+                        padding: EdgeInsets.symmetric(vertical: 8.0),
                         decoration: BoxDecoration(
-                            border: Border.all(
-                                color: Theme.of(context).iconTheme.color,
-                                width: 2.0),
-                            borderRadius: BorderRadius.circular(10.0)),
-                        child: Center(
-                          child: Text(
-                            "COPY",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 14.0,
-                                color: Theme.of(context).iconTheme.color),
+                          border: Border.all(
+                            color: Theme.of(context).iconTheme.color,
                           ),
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: Text(
+                          "COPY",
+                          textAlign: TextAlign.center,
+                          style: textTheme.button,
                         ),
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: 20.0,
+                  const EmptySpace(multiple: 3.0),
+                  CustomButton(
+                    text: "VIEW ON ANNULUS EXPLORER",
+                    onPressed: () {},
                   ),
-                  ButtonFilled(
-                    text: "VIEW ON annuluswallet EXPLORER",
-                    fontSize: 15.0,
-                    onTap: () {},
-                  ),
-                  SizedBox(
-                    height: 12.0,
-                  ),
+                  const EmptySpace(multiple: 2.5),
                   CustomOutlineButton(
                     text: "CLOSE",
                     onPressed: () => gotoDashBoard(

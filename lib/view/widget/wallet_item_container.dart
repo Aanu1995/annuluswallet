@@ -1,3 +1,5 @@
+import 'package:annuluswallet/router/router.dart';
+import 'package:annuluswallet/view/components/empty_space.dart';
 import 'package:flutter/material.dart';
 import 'package:annuluswallet/model/images.dart';
 import 'package:annuluswallet/view/screens/transaction_history/transaction_details.dart';
@@ -9,17 +11,16 @@ class WalletAllTransactionContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final primaryTheme = Theme.of(context).primaryTextTheme;
     return GestureDetector(
-      onTap: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => TransactionDetails()));
-      },
+      onTap: () => Router.goToWidget(
+        context: context,
+        page: TransactionDetails(),
+      ),
       child: Container(
-        height: 120.0,
         alignment: Alignment.centerLeft,
-        margin: EdgeInsets.symmetric(horizontal: 10.0),
-        padding: EdgeInsets.symmetric(horizontal: 8.0),
-        width: MediaQuery.of(context).size.width,
+        margin: EdgeInsets.symmetric(horizontal: 16.0),
+        padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20.0),
           color: Colors.transparent,
@@ -34,41 +35,36 @@ class WalletAllTransactionContainer extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 Image.asset(request.transactionType == 0 ? receive : sent),
-                SizedBox(
-                  width: 10.0,
-                ),
+                EmptySpace(multiple: 2.5),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
                         request.transactionType == 0 ? "Received" : "Sent",
-                        style: TextStyle(
-                          fontSize: 16.0,
-                          color: Theme.of(context).textTheme.title.color,
+                        style: primaryTheme.subhead.copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w300,
+                          letterSpacing: 1.2,
                         ),
                       ),
-                      SizedBox(
-                        height: 10.0,
-                      ),
+                      const EmptySpace(),
                       Text(
                         "${request.id}",
-                        style: TextStyle(
-                          fontSize: 14.0,
+                        style: primaryTheme.caption.copyWith(
                           color: Colors.white,
+                          fontWeight: FontWeight.w300,
                         ),
                       ),
-                      SizedBox(
-                        height: 10.0,
-                      ),
+                      const EmptySpace(),
                       RichText(
                         text: TextSpan(
                           children: [
                             TextSpan(
                               text:
                                   "${request.transactionType == 0 ? "+" : "-"}${request.formattedAmount.substring(0, request.formattedAmount.length - 3)}",
-                              style: TextStyle(
-                                fontSize: 20.0,
+                              style: primaryTheme.title.copyWith(
+                                fontWeight: FontWeight.w300,
                                 color: request.transactionType == 0
                                     ? Color(0xFF05a67b)
                                     : Color(0xFF92404d),
@@ -77,8 +73,8 @@ class WalletAllTransactionContainer extends StatelessWidget {
                             TextSpan(
                               text:
                                   "${request.formattedAmount.substring(request.formattedAmount.length - 3)}",
-                              style: TextStyle(
-                                fontSize: 14.0,
+                              style: primaryTheme.caption.copyWith(
+                                fontWeight: FontWeight.w300,
                                 color: request.transactionType == 0
                                     ? Color(0xFF05a67b)
                                     : Color(0xFF92404d),
@@ -90,12 +86,15 @@ class WalletAllTransactionContainer extends StatelessWidget {
                     ],
                   ),
                 ),
-                Text(
-                  request.date,
-                  style: TextStyle(
-                    fontSize: 10.0,
-                    color: Colors.white,
-                    letterSpacing: 1.0,
+                EmptySpace(multiple: 2.5),
+                Container(
+                  padding: EdgeInsets.only(top: 3.0),
+                  child: Text(
+                    request.date,
+                    style: primaryTheme.caption.copyWith(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w300,
+                    ),
                   ),
                 ),
               ],

@@ -1,3 +1,4 @@
+import 'package:annuluswallet/view/components/empty_space.dart';
 import 'package:flutter/material.dart';
 import 'package:annuluswallet/model/images.dart';
 
@@ -12,23 +13,29 @@ class WalletCard extends StatelessWidget {
   final Color color;
   final List<Color> gradientColor;
 
-  WalletCard(
-      {@required this.walletType,
-      @required this.amount1,
-      @required this.amount2,
-      @required this.amountBTC,
-      @required this.amountUSD,
-      @required this.date,
-      @required this.id,
-      this.color,
-      this.gradientColor});
+  WalletCard({
+    @required this.walletType,
+    @required this.amount1,
+    @required this.amount2,
+    @required this.amountBTC,
+    @required this.amountUSD,
+    @required this.date,
+    @required this.id,
+    this.color,
+    this.gradientColor,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Container(
-      width: MediaQuery.of(context).size.width,
-      padding:
-          EdgeInsets.only(left: 30.0, right: 20.0, top: 16.0, bottom: 10.0),
+      width: double.maxFinite,
+      padding: EdgeInsets.only(
+        left: 20.0,
+        right: 20.0,
+        top: 16.0,
+        bottom: 10.0,
+      ),
       decoration: color == null
           ? BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
@@ -37,31 +44,25 @@ class WalletCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(10.0), color: color),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          Container(
-            child: Text(
-              walletType,
-              style: TextStyle(
-                fontSize: 16.0,
-                letterSpacing: 1.0,
-                color: Colors.white,
-              ),
+          Text(
+            walletType,
+            style: theme.primaryTextTheme.title.copyWith(
+              color: Colors.white,
             ),
           ),
+          EmptySpace(),
           Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Row(
                 children: <Widget>[
                   Image.asset(currency),
-                  SizedBox(
-                    width: 8.0,
-                  ),
+                  EmptySpace(),
                   Text(
                     amount1,
-                    style: TextStyle(
-                      fontSize: 40.0,
-                      letterSpacing: 1.2,
+                    style: theme.primaryTextTheme.display1.copyWith(
                       color: Colors.white,
                     ),
                   ),
@@ -176,18 +177,14 @@ class WalletCard extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
-                width: 10.0,
-              ),
-              Container(
-                child: Text(
-                  "BTC",
-                  style: TextStyle(
-                    fontSize: 14.0,
-                    letterSpacing: 1.2,
-                    color: Theme.of(context).scaffoldBackgroundColor,
-                    fontWeight: FontWeight.bold,
-                  ),
+              EmptySpace(),
+              Text(
+                "BTC",
+                style: TextStyle(
+                  fontSize: 14.0,
+                  letterSpacing: 1.2,
+                  color: Theme.of(context).scaffoldBackgroundColor,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ],

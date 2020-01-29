@@ -10,21 +10,23 @@ import 'package:annuluswallet/view/widget/common.dart';
 
 class PaymentComplete extends StatelessWidget {
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey();
-  bool isSend = false;
-  String fromAddress = "";
-  String toAddress = "";
-  String label = "";
-  String transactionId = "";
-  String walletName = "";
-  String date = DateFormat("MM/dd/yyyy").format(DateTime.now());
-  String time = DateFormat("hh:mm").format(DateTime.now());
-  PaymentComplete(
-      {this.isSend,
-      this.fromAddress,
-      this.toAddress,
-      this.label,
-      this.transactionId,
-      this.walletName});
+  final bool isSend;
+  final String fromAddress;
+  final String toAddress;
+  final String label;
+  final String transactionId;
+  final String walletName;
+  PaymentComplete({
+    this.isSend = false,
+    this.fromAddress = "",
+    this.toAddress = "",
+    this.label = "",
+    this.transactionId = "",
+    this.walletName = "",
+  });
+
+  final String date = DateFormat("MM/dd/yyyy").format(DateTime.now());
+  final String time = DateFormat("hh:mm").format(DateTime.now());
 
   @override
   Widget build(BuildContext context) {

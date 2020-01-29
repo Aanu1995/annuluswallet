@@ -1,12 +1,39 @@
 import 'package:flutter/material.dart';
-import 'package:annuluswallet/model/images.dart';
-import 'package:annuluswallet/view/widget/header.dart';
-import 'package:annuluswallet/view/widget/recent_transaction_container.dart';
+
+import 'package:annuluswallet/model/small_wallet_model.dart';
+import 'package:annuluswallet/view/components/empty_space.dart';
+import 'package:annuluswallet/view/components/header.dart';
+import 'package:annuluswallet/view/components/recent_transaction_container.dart';
+import 'package:annuluswallet/view/components/small_wallet_card.dart';
 import 'package:annuluswallet/view/widget/wallet_card.dart';
 
 class DashboardMainScreen extends StatelessWidget {
+  final List<SmallWalletCardModel> smallCard = [
+    SmallWalletCardModel(
+      color: Color(0xFF184f30),
+      walletType: "Trading Wallet",
+      balance: "100,981",
+      currentValue: "4,500",
+    ),
+    SmallWalletCardModel(
+      color: Color(0xFF28aa60),
+      walletType: "Jason's Rains",
+      currentValue: "1,115",
+      balance: "0.7",
+    ),
+    SmallWalletCardModel(
+      color: Color(0xFF06c1c7),
+      walletType: "Tour De Crypto",
+      currentValue: "12,000",
+      balance: "10",
+    ),
+  ];
+
+  final double _smallCardSpacing = 75.0;
+
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return SingleChildScrollView(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -17,9 +44,7 @@ class DashboardMainScreen extends StatelessWidget {
             bitCoinValue: "B1.505398",
             dollarValue: "\$47.76k",
           ),
-          SizedBox(
-            height: 20.0,
-          ),
+          const EmptySpace(multiple: 2.5),
           WalletCard(
             gradientColor: [
               Color(0xFF07bfd1),
@@ -34,35 +59,26 @@ class DashboardMainScreen extends StatelessWidget {
             id: "Rgevdh ********* hsgdh",
             amountBTC: "0.523",
           ),
-          SizedBox(
-            height: 10.0,
-          ),
+          const EmptySpace(multiple: 1.5),
           Stack(
             children: <Widget>[
-              SmallWalletContainer(
-                  color: Color(0xFF184f30),
-                  walletType: "Trading Wallet",
-                  value1: "100,981",
-                  value2: "4,500"),
-              Container(
-                margin: EdgeInsets.only(top: 85.0),
-                child: SmallWalletContainer(
-                    color: Color(0xFF28aa60),
-                    walletType: "Jason's Rains",
-                    value1: "1,115",
-                    value2: "0.7"),
+              Stack(
+                children: <Widget>[
+                  for (int i = 0; i < smallCard.length; i++)
+                    Container(
+                      margin: EdgeInsets.only(top: _smallCardSpacing * i),
+                      child: SmallWalletCard(
+                        color: smallCard[i].color,
+                        value1: smallCard[i].currentValue,
+                        value2: smallCard[i].balance,
+                        walletType: smallCard[i].walletType,
+                      ),
+                    )
+                ],
               ),
               Container(
-                margin: EdgeInsets.only(top: 170.0),
-                child: SmallWalletContainer(
-                  color: Color(0xFF06c1c7),
-                  walletType: "Tour De Crypto",
-                  value1: "12,000",
-                  value2: "10",
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(top: 255),
+                margin:
+                    EdgeInsets.only(top: _smallCardSpacing * smallCard.length),
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10.0),
@@ -72,8 +88,11 @@ class DashboardMainScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Container(
-                      padding:
-                          EdgeInsets.only(left: 10.0, top: 20.0, bottom: 10.0),
+                      alignment: Alignment.center,
+                      padding: const EdgeInsets.only(
+                        left: 10.0,
+                        top: 20.0,
+                      ),
                       child: Text(
                         "Recent transactions",
                         style: TextStyle(
@@ -82,11 +101,9 @@ class DashboardMainScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: 20.0,
-                    ),
+                    const EmptySpace(multiple: 2.5),
                     ...[
-                      TransactionContainer(
+                      RecentContainer(
                         walletType: "Mobile Wallet",
                         icon: Icons.card_giftcard,
                         date: "01 FEB 2019",
@@ -94,7 +111,7 @@ class DashboardMainScreen extends StatelessWidget {
                         time: "11:30 AM",
                         isDeposit: true,
                       ),
-                      TransactionContainer(
+                      RecentContainer(
                         walletType: "Reskii............roy6yh",
                         date: "08 AUG 2019",
                         amount: "-343,452",
@@ -102,7 +119,7 @@ class DashboardMainScreen extends StatelessWidget {
                         isDeposit: false,
                         icon: Icons.card_giftcard,
                       ),
-                      TransactionContainer(
+                      RecentContainer(
                         walletType: "Mobile Wallet",
                         icon: Icons.card_giftcard,
                         date: "10 JUNE 2019",
@@ -113,22 +130,19 @@ class DashboardMainScreen extends StatelessWidget {
                     ],
                     Container(
                       height: 40.0,
-                      width: MediaQuery.of(context).size.width,
+                      width: double.maxFinite,
                       margin: EdgeInsets.symmetric(
-                          horizontal: 16.0, vertical: 30.0),
+                        horizontal: 16.0,
+                        vertical: 30.0,
+                      ),
                       decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Theme.of(context).iconTheme.color,
-                        ),
+                        border: Border.all(color: theme.iconTheme.color),
                       ),
                       child: Center(
                         child: Text(
                           "VIEW ALL",
-                          style: TextStyle(
-                            fontSize: 16.0,
-                            letterSpacing: 1.2,
-                            color: Theme.of(context).iconTheme.color,
-                            fontWeight: FontWeight.w600,
+                          style: theme.primaryTextTheme.subtitle.copyWith(
+                            color: Colors.white,
                           ),
                         ),
                       ),
@@ -138,93 +152,6 @@ class DashboardMainScreen extends StatelessWidget {
               )
             ],
           ),
-        ],
-      ),
-    );
-  }
-}
-
-class SmallWalletContainer extends StatelessWidget {
-  final Color color;
-  final String walletType;
-  final String value1;
-  final String value2;
-  SmallWalletContainer({this.color, this.value1, this.value2, this.walletType});
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 100,
-      width: MediaQuery.of(context).size.width,
-      padding:
-          EdgeInsets.only(left: 30.0, right: 20.0, top: 30.0, bottom: 10.0),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10.0),
-        color: color,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(
-            walletType,
-            style: TextStyle(
-              fontSize: 16.0,
-              letterSpacing: 1.0,
-              color: Colors.white,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: <Widget>[
-              Row(
-                children: <Widget>[
-                  Image.asset(currency),
-                  SizedBox(
-                    width: 5.0,
-                  ),
-                  Text(
-                    "$value1",
-                    style: TextStyle(
-                      fontSize: 18.0,
-                      letterSpacing: 1.2,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 5.0,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    "\$$value2",
-                    style: TextStyle(
-                      fontSize: 14.0,
-                      letterSpacing: 1.2,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  SizedBox(
-                    width: 10.0,
-                  ),
-                  Text(
-                    "USD",
-                    style: TextStyle(
-                      fontSize: 14.0,
-                      letterSpacing: 1.2,
-                      color: Theme.of(context).scaffoldBackgroundColor,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          )
         ],
       ),
     );

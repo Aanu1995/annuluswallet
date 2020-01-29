@@ -1,8 +1,8 @@
+import 'package:annuluswallet/view/components/header.dart';
+import 'package:annuluswallet/view/components/recent_transaction_container.dart';
+import 'package:annuluswallet/view/components/small_wallet_card.dart';
 import 'package:flutter/material.dart';
 import 'package:annuluswallet/model/images.dart';
-import 'package:annuluswallet/view/screens/main/dashboard_main_screen.dart';
-import 'package:annuluswallet/view/widget/header.dart';
-import 'package:annuluswallet/view/widget/recent_transaction_container.dart';
 import 'package:annuluswallet/view/widget/wallet_card.dart';
 
 class TransactionDashoardPage extends StatefulWidget {
@@ -118,14 +118,15 @@ class _TransactionDashoardPageState extends State<TransactionDashoardPage> {
                 ),
                 Stack(
                   children: <Widget>[
-                    SmallWalletContainer(
-                        color: Color(0xFF184f30),
-                        walletType: "Trading Wallet",
-                        value1: "100,981",
-                        value2: "4,500"),
+                    SmallWalletCard(
+                      color: Color(0xFF184f30),
+                      walletType: "Trading Wallet",
+                      value1: "100,981",
+                      value2: "4,500",
+                    ),
                     Container(
                       margin: EdgeInsets.only(top: 85.0),
-                      child: SmallWalletContainer(
+                      child: SmallWalletCard(
                           color: Color(0xFF28aa60),
                           walletType: "Jason's Rains",
                           value1: "1,115",
@@ -133,7 +134,7 @@ class _TransactionDashoardPageState extends State<TransactionDashoardPage> {
                     ),
                     Container(
                       margin: EdgeInsets.only(top: 170.0),
-                      child: SmallWalletContainer(
+                      child: SmallWalletCard(
                         color: Color(0xFF06c1c7),
                         walletType: "Tour De Crypto",
                         value1: "12,000",
@@ -165,7 +166,7 @@ class _TransactionDashoardPageState extends State<TransactionDashoardPage> {
                             height: 20.0,
                           ),
                           ...[
-                            TransactionContainer(
+                            RecentContainer(
                               walletType: "Mobile Wallet",
                               icon: Icons.card_giftcard,
                               date: "01 FEB 2019",
@@ -173,7 +174,7 @@ class _TransactionDashoardPageState extends State<TransactionDashoardPage> {
                               time: "11:30 AM",
                               isDeposit: true,
                             ),
-                            TransactionContainer(
+                            RecentContainer(
                               walletType: "Reskii............roy6yh",
                               date: "08 AUG 2019",
                               amount: "-343,452",
@@ -181,7 +182,7 @@ class _TransactionDashoardPageState extends State<TransactionDashoardPage> {
                               isDeposit: false,
                               icon: Icons.card_giftcard,
                             ),
-                            TransactionContainer(
+                            RecentContainer(
                               walletType: "Mobile Wallet",
                               icon: Icons.card_giftcard,
                               date: "10 JUNE 2019",

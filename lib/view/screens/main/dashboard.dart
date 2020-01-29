@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import 'package:annuluswallet/model/images.dart';
@@ -35,16 +36,21 @@ class _DashBoardPageState extends State<DashBoardPage>
         preferredSize: Size(double.maxFinite, 80.0),
         child: _tabController.index == 0
             ? DashboardAppBar(globalKey: _globalKey)
-            : TransactionAppBar(),
+            : TransactionAppBar(title: "All Transactions"),
       ),
       body: Container(
         margin: EdgeInsets.only(bottom: 16.0),
         child: TabBarView(
           controller: _tabController,
           physics: NeverScrollableScrollPhysics(),
+          dragStartBehavior: DragStartBehavior.down,
           children: [
-            DashboardMainScreen(),
-            TransactionHistoryPage(),
+            _tabController.index == 0
+                ? DashboardMainScreen()
+                : TransactionHistoryPage(),
+            _tabController.index == 1
+                ? TransactionHistoryPage()
+                : DashboardMainScreen(),
           ],
         ),
       ),

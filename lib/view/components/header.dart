@@ -1,3 +1,4 @@
+import 'package:annuluswallet/view/components/empty_space.dart';
 import 'package:flutter/material.dart';
 
 class Header extends StatelessWidget {
@@ -8,57 +9,48 @@ class Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final primaryTextTheme = Theme.of(context).primaryTextTheme;
     return Container(
       padding: EdgeInsets.only(left: 24.0, right: 16.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Container(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  amount,
-                  style: TextStyle(
-                    fontSize: 30.0,
-                    letterSpacing: 1.0,
-                    color: Color(0xFF2ff685),
-                  ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                amount,
+                style: TextStyle(
+                  fontSize: 28.0,
+                  letterSpacing: 1.0,
+                  color: Color(0xFF2ff685),
                 ),
-                SizedBox(
-                  height: 3.0,
+              ),
+              EmptySpace(multiple: 0.3),
+              Text(
+                "Total Portfolio",
+                style: primaryTextTheme.subtitle.copyWith(
+                  color: Color(0xFF2ff685),
+                  letterSpacing: 1.2,
+                  fontWeight: FontWeight.w400,
                 ),
-                Text(
-                  "Total Portfolio",
-                  style: TextStyle(
-                    fontSize: 13.0,
-                    letterSpacing: 1.2,
-                    color: Color(0xFF2ff685),
-                  ),
-                ),
-              ],
+              ),
+            ],
+          ),
+          Text(
+            bitCoinValue,
+            style: primaryTextTheme.subhead.copyWith(
+              color: Colors.white,
+              fontWeight: FontWeight.w400,
             ),
           ),
-          Container(
-            padding: EdgeInsets.only(top: 8.0),
-            child: Text(
-              bitCoinValue,
-              style: TextStyle(
-                fontSize: 16.0,
-                color: Colors.white,
-              ),
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.only(top: 8.0),
-            child: Text(
-              dollarValue,
-              style: TextStyle(
-                fontSize: 16.0,
-                color: Colors.white,
-              ),
+          Text(
+            dollarValue,
+            style: primaryTextTheme.subhead.copyWith(
+              color: Colors.white,
+              fontWeight: FontWeight.w400,
             ),
           ),
         ],

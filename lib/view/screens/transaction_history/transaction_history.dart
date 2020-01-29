@@ -47,7 +47,7 @@ class TransactionHistoryPage extends StatelessWidget {
       padding: EdgeInsets.zero,
       children: <Widget>[
         Container(
-          height: 100.0,
+          padding: EdgeInsets.symmetric(vertical: 16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[

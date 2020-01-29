@@ -1,3 +1,4 @@
+import 'package:annuluswallet/view/screens/main/dashboard.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter/services.dart';
@@ -12,7 +13,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations(
-        [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown],
+    );
     return BaseProvider(
       child: MaterialApp(
         title: 'Annulus',
@@ -45,8 +47,8 @@ class MyApp extends StatelessWidget {
             color: ColorUtils.BOTTOM_APPBAR_COLOR,
           ),
         ),
-        //home: DashBoardPage(),
-        routes: Routes.getRoutes,
+        home: DashBoardPage(),
+        //routes: Routes.getRoutes,
       ),
     );
   }

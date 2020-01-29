@@ -1,3 +1,5 @@
+import 'package:annuluswallet/view/components/header.dart';
+import 'package:annuluswallet/view/components/recent_transaction_container.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:annuluswallet/model/images.dart';
@@ -6,8 +8,6 @@ import 'package:annuluswallet/view/screens/main/dashboard.dart';
 import 'package:annuluswallet/view/screens/main/dashboard_menu_drawer.dart';
 import 'package:annuluswallet/view/screens/wallet/wallet_details.dart';
 import 'package:annuluswallet/view/widget/app_bar.dart';
-import 'package:annuluswallet/view/widget/header.dart';
-import 'package:annuluswallet/view/widget/recent_transaction_container.dart';
 import 'package:annuluswallet/view/widget/wallet_card.dart';
 
 class WalletScreen extends StatelessWidget {
@@ -64,7 +64,7 @@ class WalletScreen extends StatelessWidget {
                       child: Column(
                     children: <Widget>[
                       ...[
-                        TransactionContainer(
+                        RecentContainer(
                           walletType: "Mobile Wallet",
                           icon: Icons.card_giftcard,
                           date: "01 FEB 2019",
@@ -72,7 +72,7 @@ class WalletScreen extends StatelessWidget {
                           time: "11:30 AM",
                           isDeposit: true,
                         ),
-                        TransactionContainer(
+                        RecentContainer(
                           walletType: "Reskii............roy6yh",
                           date: "08 AUG 2019",
                           amount: "-343,452",
@@ -80,7 +80,7 @@ class WalletScreen extends StatelessWidget {
                           isDeposit: false,
                           icon: Icons.card_giftcard,
                         ),
-                        TransactionContainer(
+                        RecentContainer(
                           walletType: "Mobile Wallet",
                           icon: Icons.card_giftcard,
                           date: "10 JUNE 2019",

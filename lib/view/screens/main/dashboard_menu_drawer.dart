@@ -2,7 +2,6 @@ import 'package:annuluswallet/router/router.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:annuluswallet/model/drawerModel.dart';
 import 'package:annuluswallet/view/components/empty_space.dart';
 import 'package:annuluswallet/model/images.dart';
 import 'package:annuluswallet/provider/walletProvider.dart';
@@ -10,6 +9,7 @@ import 'package:annuluswallet/view/screens/main/dashboard.dart';
 import 'package:annuluswallet/view/screens/manage%20wallet/manage_wallet.dart';
 import 'package:annuluswallet/view/screens/transaction_history/transaction.dart';
 import 'package:annuluswallet/view/screens/wallet/wallet_screen.dart';
+import 'package:annuluswallet/model/drawer_model.dart';
 
 class DashboardMenu extends StatelessWidget {
   final List<DrawerModel> list = [
