@@ -1,3 +1,6 @@
+import 'package:annuluswallet/view/components/export_components.dart';
+import 'package:annuluswallet/view/components/get_wallet.dart';
+import 'package:annuluswallet/view/screens/send/components/head_text.dart';
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
@@ -6,8 +9,6 @@ import 'package:annuluswallet/provider/walletProvider.dart';
 import 'package:annuluswallet/view/screens/receive/receive.dart';
 import 'package:annuluswallet/view/screens/send/send_wallet.dart';
 import 'package:annuluswallet/router/router.dart';
-import 'package:annuluswallet/view/widget/app_bar.dart';
-import 'package:annuluswallet/view/widget/get_wallet.dart';
 import 'package:annuluswallet/view/screens/new_wallet/successfully_created_wallet_key.dart';
 
 class SendPage extends StatelessWidget {
@@ -15,12 +16,15 @@ class SendPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: RapidAppBarPage(
-          preContext: context,
-          appTitle: "Send",
-          address: "To External Address"),
+      appBar: PreferredSize(
+        preferredSize: Size(double.maxFinite, 70),
+        child: TransactionAppBar(
+          title: "Send",
+          subtitle: "To External Address",
+        ),
+      ),
       body: Container(
-        margin: EdgeInsets.only(top: 10.0, bottom: 30.0),
+        margin: EdgeInsets.only(top: 10.0, bottom: 10.0),
         child: SingleChildScrollView(
           child: FromWallet(),
         ),
@@ -30,7 +34,6 @@ class SendPage extends StatelessWidget {
 }
 
 class FromWallet extends StatelessWidget {
-  final Color color = Colors.black;
   static String walletID = "";
 
   @override
@@ -47,20 +50,7 @@ class FromWallet extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-        SizedBox(
-          height: 20.0,
-        ),
-        Text(
-          "FROM ADDRESS",
-          style: TextStyle(
-            fontSize: 16.0,
-            letterSpacing: 2.0,
-            color: color,
-          ),
-        ),
-        SizedBox(
-          height: 20.0,
-        ),
+        HeadText(),
         for (int i = 0; i < list.length; i++)
           GetWallet(
             wallet: list[i],

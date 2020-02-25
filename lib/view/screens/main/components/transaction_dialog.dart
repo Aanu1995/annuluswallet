@@ -47,6 +47,12 @@ class TransactionDialog {
                               subtitle: "Within our own Address",
                               logo: transfer,
                               color: Color(0xFF74c5b0),
+                              onTap: () {
+                                Navigator.pop(context);
+                                Router.goToScreen(
+                                    context: context,
+                                    page: Routes.TRANSFERPAGE);
+                              },
                             ),
                           ),
                           EmptySpace(),
@@ -56,6 +62,11 @@ class TransactionDialog {
                               subtitle: "To External Address",
                               logo: sent,
                               color: Color(0XFFf6a3ac),
+                              onTap: () {
+                                Navigator.pop(context);
+                                Router.goToScreen(
+                                    context: context, page: Routes.SENDPAGE);
+                              },
                             ),
                           ),
                           EmptySpace(),
@@ -65,6 +76,11 @@ class TransactionDialog {
                               subtitle: "To own address",
                               logo: receive,
                               color: Color(0xFF74c5b0),
+                              onTap: () {
+                                Navigator.pop(context);
+                                Router.goToScreen(
+                                    context: context, page: Routes.RECEIVEPAGE);
+                              },
                             ),
                           )
                         ],

@@ -1,16 +1,22 @@
+import 'package:annuluswallet/view/components/export_components.dart';
+import 'package:annuluswallet/view/components/get_wallet.dart';
+import 'package:annuluswallet/view/components/selected_wallet.dart';
 import 'package:flutter/material.dart';
 import 'package:annuluswallet/view/screens/receive/receive.dart';
 import 'package:annuluswallet/view/screens/transfer/from_to_address.dart';
-import 'package:annuluswallet/view/widget/app_bar.dart';
-import 'package:annuluswallet/view/widget/get_wallet.dart';
-import 'package:annuluswallet/view/widget/selected_wallet.dart';
 
 class TransferPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: RapidAppBarPage(preContext: context, appTitle: "Transfer"),
+      appBar: PreferredSize(
+        preferredSize: Size(double.maxFinite, 70),
+        child: TransactionAppBar(
+          title: "Transfer",
+          subtitle: "To Own Address",
+        ),
+      ),
       body: Container(
         margin: EdgeInsets.only(top: 10.0, bottom: 30.0),
         child: SingleChildScrollView(
@@ -76,7 +82,13 @@ class ToWallet extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: RapidAppBarPage(preContext: context, appTitle: "Transfer"),
+      appBar: PreferredSize(
+        preferredSize: Size(double.maxFinite, 70),
+        child: TransactionAppBar(
+          title: "Transfer",
+          subtitle: "To Own Address",
+        ),
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[

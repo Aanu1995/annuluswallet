@@ -1,13 +1,13 @@
 import 'package:annuluswallet/router/router.dart';
 import 'package:annuluswallet/view/components/custom_buttons.dart';
+import 'package:annuluswallet/view/components/export_components.dart';
+import 'package:annuluswallet/view/components/selected_wallet.dart';
 import 'package:flutter/material.dart';
 import 'package:annuluswallet/provider/walletProvider.dart';
 import 'package:annuluswallet/view/screens/receive/receive.dart';
 import 'package:annuluswallet/view/screens/transfer/function_widget.dart';
 import 'package:annuluswallet/view/screens/transfer/transfer_confirm_payment.dart';
-import 'package:annuluswallet/view/widget/app_bar.dart';
 import 'package:annuluswallet/view/widget/common.dart';
-import 'package:annuluswallet/view/widget/selected_wallet.dart';
 import 'package:provider/provider.dart';
 
 class FromWalletToSendWallet extends StatefulWidget {
@@ -54,7 +54,13 @@ class _FromWalletToSendWalletState extends State<FromWalletToSendWallet> {
     DashboardProvider provider = Provider.of<DashboardProvider>(context);
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: RapidAppBarPage(preContext: context, appTitle: "Transfer"),
+      appBar: PreferredSize(
+        preferredSize: Size(double.maxFinite, 70),
+        child: TransactionAppBar(
+          title: "Transfer",
+          subtitle: "To Own Address",
+        ),
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[

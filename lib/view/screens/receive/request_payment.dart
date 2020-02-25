@@ -1,13 +1,13 @@
 import 'package:annuluswallet/provider/info_display_provider.dart';
 import 'package:annuluswallet/view/components/export_components.dart';
+import 'package:annuluswallet/view/components/scan.dart';
+import 'package:annuluswallet/view/components/selected_wallet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_money_formatter/flutter_money_formatter.dart';
 import 'package:provider/provider.dart';
 import 'package:annuluswallet/view/screens/receive/payment.dart';
 import 'package:annuluswallet/view/screens/receive/receive.dart';
-import 'package:annuluswallet/view/widget/app_bar.dart';
 import 'package:annuluswallet/view/widget/common.dart';
-import 'package:annuluswallet/view/widget/selected_wallet.dart';
 
 class RequestPaymentPage extends StatefulWidget {
   final Wallet wallet;
@@ -49,7 +49,13 @@ class _RequestPaymentPageState extends State<RequestPaymentPage> {
   Widget build(BuildContext context) {
     final clipboard = Provider.of<ClipBoardProvider>(context);
     return Scaffold(
-      appBar: RapidAppBarPage(preContext: context, appTitle: "Receive"),
+      appBar: PreferredSize(
+        preferredSize: Size(double.maxFinite, 70),
+        child: TransactionAppBar(
+          title: "Receive",
+          subtitle: "To Own Address",
+        ),
+      ),
       backgroundColor: Colors.white,
       body: Stack(
         children: <Widget>[
@@ -86,7 +92,7 @@ class _RequestPaymentPageState extends State<RequestPaymentPage> {
                       children: <Widget>[
                         Align(
                           alignment: Alignment.topRight,
-                          child: ButtonCopy(
+                          child: Scan(
                             title: "COPY ADDRESS",
                             onTap: () => clipboard.setClipboardStatus(
                                 widget.wallet.id, true),
@@ -301,35 +307,5 @@ class _RequestPaymentPageState extends State<RequestPaymentPage> {
     } else {
       return false;
     }
-  }
-}
-
-// This widget is used to display the button in the clipboard and share
-class ButtonCopy extends StatelessWidget {
-  final String title;
-  final Function onTap;
-  ButtonCopy({this.title, this.onTap});
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: Container(
-        height: 45.0,
-        width: 160,
-        decoration: BoxDecoration(
-            border: Border.all(
-                color: Theme.of(context).iconTheme.color, width: 2.0),
-            borderRadius: BorderRadius.circular(10.0)),
-        child: Center(
-          child: Text(
-            title,
-            style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 14.0,
-                color: Theme.of(context).iconTheme.color),
-          ),
-        ),
-      ),
-    );
   }
 }

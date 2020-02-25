@@ -15,13 +15,14 @@ class TransferWidgetFunction {
               "Cancel payment?",
               style: TextStyle(
                   color: Colors.black,
-                  fontSize: 20.0,
+                  fontSize: 18.0,
                   fontWeight: FontWeight.bold),
             ),
             content: Text(
               "By accepting this cancellation you will be returned to the home screen",
               style: TextStyle(
-                fontSize: 16.0,
+                fontSize: 15.0,
+                height: 1.2,
               ),
             ),
             actions: <Widget>[
@@ -29,21 +30,18 @@ class TransferWidgetFunction {
                 child: Text(
                   "DECLINE",
                   style: TextStyle(
-                    fontSize: 16.0,
+                    fontSize: 14.0,
                   ),
                 ),
                 onPressed: () {
                   Navigator.pop(context);
                 },
               ),
-              SizedBox(
-                width: 5.0,
-              ),
               FlatButton(
                 child: Text(
                   "ACCEPT",
                   style: TextStyle(
-                    fontSize: 16.0,
+                    fontSize: 14.0,
                   ),
                 ),
                 onPressed: () {

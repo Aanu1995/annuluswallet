@@ -5,7 +5,8 @@ import 'package:provider/provider.dart';
 
 class CopyDialog extends StatefulWidget {
   final EdgeInsets margin;
-  CopyDialog({this.margin});
+  final String title;
+  CopyDialog({this.margin, this.title});
 
   @override
   _CopyDialogState createState() => _CopyDialogState();
@@ -66,7 +67,7 @@ class _CopyDialogState extends State<CopyDialog>
                     width: 20.0,
                   ),
                   Text(
-                    "Copied to clipboard",
+                    widget.title ?? "Copied to clipboard",
                     style: Theme.of(context).primaryTextTheme.subhead.copyWith(
                           color: Theme.of(context).iconTheme.color,
                         ),

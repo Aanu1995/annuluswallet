@@ -162,7 +162,11 @@ class DashboardAppBar extends StatelessWidget {
 
 class TransactionAppBar extends StatelessWidget {
   final String title;
-  const TransactionAppBar({this.title});
+  final String subtitle;
+  final icon;
+  final globalKey;
+  const TransactionAppBar(
+      {this.title, this.subtitle, this.icon, this.globalKey});
   @override
   Widget build(BuildContext context) {
     final primaryTheme = Theme.of(context).primaryTextTheme;
@@ -170,30 +174,49 @@ class TransactionAppBar extends StatelessWidget {
       color: Theme.of(context).appBarTheme.color,
       child: SafeArea(
         child: Container(
-          padding: EdgeInsets.only(top: 8.0, left: 16.0, right: 16.0),
+          padding: EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               InkWell(
                 child: Image.asset(
-                  leftArrow,
+                  icon ?? leftArrow,
                   color: Theme.of(context).iconTheme.color,
                   height: 28.0,
                   width: 28.0,
                 ),
-                onTap: () => Router.goBack(context: context),
+                onTap: () => globalKey == null
+                    ? Router.goBack(context: context)
+                    : globalKey.currentState.openDrawer(),
               ),
               Spacer(),
               Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(
-                    title,
-                    style: primaryTheme.title.copyWith(
-                      color: Colors.white,
-                      fontSize: 17.0,
-                      fontWeight: FontWeight.w400,
-                    ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: <Widget>[
+                      Text(
+                        title,
+                        style: primaryTheme.title.copyWith(
+                          color: Colors.white,
+                          fontSize: 17.0,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                      SizedBox(height: 5.0),
+                      subtitle == null
+                          ? Offstage()
+                          : Text(
+                              subtitle ?? "To Own Address",
+                              style: TextStyle(
+                                fontSize: 12.0,
+                                color: Colors.white,
+                              ),
+                            )
+                    ],
                   ),
                   EmptySpace(),
                   Image.asset(logo2, height: 40.0, width: 40.0),

@@ -16,7 +16,7 @@ dependencies:
   clipboard_manager: ^0.0.4
   share: ^0.6.2+1
   countdown: ^0.1.0
-  majascan: ^0.3.2
+  majascan: ^0.3.5
   font_awesome_flutter: ^8.5.0
   esys_flutter_share: ^1.0.2
   screenshot: ^0.1.1

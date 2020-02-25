@@ -1,15 +1,21 @@
+import 'package:annuluswallet/view/components/export_components.dart';
+import 'package:annuluswallet/view/components/get_wallet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_money_formatter/flutter_money_formatter.dart';
 import 'package:annuluswallet/view/screens/receive/request_payment.dart';
-import 'package:annuluswallet/view/widget/app_bar.dart';
-import 'package:annuluswallet/view/widget/get_wallet.dart';
 
 class ReceivePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: RapidAppBarPage(preContext: context, appTitle: "Receive"),
+      appBar: PreferredSize(
+        preferredSize: Size(double.maxFinite, 70),
+        child: TransactionAppBar(
+          title: "Receive",
+          subtitle: "To Own Address",
+        ),
+      ),
       body: Container(
         margin: EdgeInsets.only(top: 10.0, bottom: 30.0),
         child: SingleChildScrollView(

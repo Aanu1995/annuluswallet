@@ -45,7 +45,7 @@ class CustomOutlineButton extends StatelessWidget {
         shape: StadiumBorder(),
         child: Text(
           text,
-          style: theme.primaryTextTheme.button,
+          style: theme.primaryTextTheme.button.copyWith(color: color),
         ),
         onPressed: onPressed,
       ),

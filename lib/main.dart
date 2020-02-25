@@ -1,3 +1,4 @@
+import 'package:annuluswallet/view/screens/send/send_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter/services.dart';
@@ -46,7 +47,7 @@ class MyApp extends StatelessWidget {
             color: ColorUtils.BOTTOM_APPBAR_COLOR,
           ),
         ),
-        //home: DashBoardPage(),
+        //home: SendPage(),
         routes: Routes.getRoutes,
       ),
     );

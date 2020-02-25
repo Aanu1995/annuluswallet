@@ -28,7 +28,8 @@ class _WalletKeyCreationSuccessfulState
         Duration(seconds: 2),
       );
       Router.goToReplacementWidget(
-          context: context, page: WalletCreatedSuccessfullyPage());
+          context: context,
+          page: widget.page ?? WalletCreatedSuccessfullyPage());
     });
   }
 

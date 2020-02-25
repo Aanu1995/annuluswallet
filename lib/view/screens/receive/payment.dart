@@ -1,6 +1,8 @@
 import 'dart:typed_data';
 import 'package:annuluswallet/provider/info_display_provider.dart';
 import 'package:annuluswallet/view/components/export_components.dart';
+import 'package:annuluswallet/view/components/scan.dart';
+import 'package:annuluswallet/view/components/selected_wallet.dart';
 import 'package:esys_flutter_share/esys_flutter_share.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -10,9 +12,7 @@ import 'package:annuluswallet/provider/walletProvider.dart';
 import 'package:annuluswallet/view/screens/main/dashboard_menu_drawer.dart';
 import 'package:annuluswallet/view/screens/receive/receive.dart';
 import 'package:annuluswallet/view/screens/receive/request_payment.dart';
-import 'package:annuluswallet/view/widget/app_bar.dart';
 import 'package:annuluswallet/view/widget/routes.dart';
-import 'package:annuluswallet/view/widget/selected_wallet.dart';
 
 import 'package:screenshot/screenshot.dart';
 
@@ -43,11 +43,14 @@ class _PaymentPageState extends State<PaymentPage> {
       },
       child: Scaffold(
         key: _globalKey,
-        appBar: RapidAppBarPage(
-            preContext: context,
-            appTitle: "Receive",
-            icon: drawer,
-            globalKey: _globalKey),
+        appBar: PreferredSize(
+          preferredSize: Size(double.maxFinite, 70),
+          child: TransactionAppBar(
+              title: "Receive",
+              subtitle: "To Own Address",
+              icon: drawer,
+              globalKey: _globalKey),
+        ),
         backgroundColor: Colors.white,
         body: Stack(
           children: <Widget>[
@@ -81,7 +84,7 @@ class _PaymentPageState extends State<PaymentPage> {
                           children: <Widget>[
                             Align(
                               alignment: Alignment.topRight,
-                              child: ButtonCopy(
+                              child: Scan(
                                 title: "COPY ADDRESS",
                                 onTap: () => clipboard.setClipboardStatus(
                                     widget.wallet.id, true),
@@ -111,11 +114,11 @@ class _PaymentPageState extends State<PaymentPage> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
                                   children: <Widget>[
-                                    ButtonCopy(
+                                    Scan(
                                       title: "SAVE URI",
                                       onTap: () {},
                                     ),
-                                    ButtonCopy(
+                                    Scan(
                                       title: "SAVE QR",
                                       onTap: () {},
                                     )

@@ -1,3 +1,4 @@
+import 'package:annuluswallet/view/components/empty_space.dart';
 import 'package:flutter/material.dart';
 import 'package:annuluswallet/model/images.dart';
 import 'package:annuluswallet/view/screens/receive/receive.dart';
@@ -10,6 +11,7 @@ class GetWallet extends StatelessWidget {
   GetWallet({this.onTap, this.wallet});
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
     return InkWell(
       splashColor: Colors.grey,
       onTap: onTap,
@@ -17,8 +19,8 @@ class GetWallet extends StatelessWidget {
         alignment: Alignment.centerLeft,
         margin: EdgeInsets.symmetric(horizontal: 10.0),
         padding:
-            EdgeInsets.only(left: 10.0, right: 10.0, top: 20.0, bottom: 12.0),
-        width: MediaQuery.of(context).size.width,
+            EdgeInsets.only(left: 10.0, right: 12.0, top: 10.0, bottom: 12.0),
+        width: double.maxFinite,
         decoration: BoxDecoration(
           color: Colors.transparent,
           border: Border.all(color: Colors.grey, width: 0.8),
@@ -26,10 +28,8 @@ class GetWallet extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Image.asset(walletTrans),
-            SizedBox(
-              width: 16.0,
-            ),
+            Image.asset(walletTrans, height: 25.0, width: 25.0),
+            const EmptySpace(horizontal: true, multiple: 2.0),
             Expanded(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -50,15 +50,9 @@ class GetWallet extends StatelessWidget {
                               children: <Widget>[
                                 Text(
                                   "${wallet.walletType}",
-                                  style: TextStyle(
-                                    fontSize: 19.0,
-                                    color: color,
-                                    fontWeight: FontWeight.w400,
-                                  ),
+                                  style: textTheme.subtitle,
                                 ),
-                                SizedBox(
-                                  height: 10.0,
-                                ),
+                                EmptySpace(multiple: 0.8),
                                 RichText(
                                   text: TextSpan(
                                     children: [
@@ -66,7 +60,7 @@ class GetWallet extends StatelessWidget {
                                         text:
                                             "${wallet.formattedAmount.substring(0, wallet.formattedAmount.length - 3)}",
                                         style: TextStyle(
-                                          fontSize: 19.0,
+                                          fontSize: 18.0,
                                           color: color,
                                           fontWeight: FontWeight.bold,
                                         ),
@@ -75,7 +69,7 @@ class GetWallet extends StatelessWidget {
                                         text:
                                             "${wallet.formattedAmount.substring(wallet.formattedAmount.length - 3)}",
                                         style: TextStyle(
-                                          fontSize: 14.0,
+                                          fontSize: 13.0,
                                           color: color,
                                           fontWeight: FontWeight.bold,
                                         ),
@@ -83,9 +77,7 @@ class GetWallet extends StatelessWidget {
                                     ],
                                   ),
                                 ),
-                                SizedBox(
-                                  height: 10.0,
-                                ),
+                                EmptySpace(multiple: 0.8),
                               ],
                             ),
                           ],
@@ -93,22 +85,14 @@ class GetWallet extends StatelessWidget {
                         Container(
                           child: Text(
                             "${wallet.id}",
-                            style: TextStyle(
-                              fontSize: 14.0,
-                              color: color,
-                            ),
+                            style: textTheme.caption,
                           ),
                         )
                       ],
                     ),
                   ),
-                  SizedBox(
-                    width: 10.0,
-                  ),
-                  Icon(
-                    Icons.arrow_forward_ios,
-                    size: 22.0,
-                  ),
+                  EmptySpace(horizontal: true),
+                  Icon(Icons.arrow_forward_ios, size: 16.0),
                 ],
               ),
             ),
