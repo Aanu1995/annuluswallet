@@ -58,9 +58,11 @@ class _ConfirmPasswordPage extends StatelessWidget {
                   style: theme.primaryTextTheme.title,
                 ),
               ),
-              ConfirmPasswordField(
-                password: password,
-                page: page,
+              Expanded(
+                child: ConfirmPasswordField(
+                  password: password,
+                  page: page,
+                ),
               )
             ],
           ),

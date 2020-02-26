@@ -52,7 +52,9 @@ class _CreatePasswordPage extends StatelessWidget {
                   style: theme.primaryTextTheme.title,
                 ),
               ),
-              const PasswordField(),
+              Expanded(
+                child: const PasswordField(),
+              ),
             ],
           ),
         ),

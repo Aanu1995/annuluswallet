@@ -47,8 +47,8 @@ class MyApp extends StatelessWidget {
             color: ColorUtils.BOTTOM_APPBAR_COLOR,
           ),
         ),
-        home: ReceivePage(),
-        //routes: Routes.getRoutes,
+        // home: ReceivePage(),
+        routes: Routes.getRoutes,
       ),
     );
   }
