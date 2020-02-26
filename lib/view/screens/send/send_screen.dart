@@ -1,12 +1,10 @@
+import 'package:annuluswallet/model/wallet.dart';
 import 'package:annuluswallet/view/components/export_components.dart';
-import 'package:annuluswallet/view/components/get_wallet.dart';
-import 'package:annuluswallet/view/screens/send/components/head_text.dart';
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
 
 import 'package:annuluswallet/provider/walletProvider.dart';
-import 'package:annuluswallet/view/screens/receive/receive.dart';
 import 'package:annuluswallet/view/screens/send/send_wallet.dart';
 import 'package:annuluswallet/router/router.dart';
 import 'package:annuluswallet/view/screens/new_wallet/successfully_created_wallet_key.dart';

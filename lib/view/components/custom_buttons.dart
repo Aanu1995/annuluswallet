@@ -41,7 +41,10 @@ class CustomOutlineButton extends StatelessWidget {
       height: 45.0,
       child: OutlineButton(
         color: Colors.transparent,
-        borderSide: BorderSide(color: Theme.of(context).iconTheme.color),
+        borderSide: BorderSide(
+          color: Theme.of(context).iconTheme.color,
+          width: 1.3,
+        ),
         shape: StadiumBorder(),
         child: Text(
           text,

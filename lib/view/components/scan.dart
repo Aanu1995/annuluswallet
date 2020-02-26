@@ -7,9 +7,9 @@ class Scan extends StatelessWidget {
   Scan({this.title, this.onTap});
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 120,
+    return Container(
       height: 35.0,
+      padding: EdgeInsets.symmetric(horizontal: 16.0),
       child: OutlineButton(
         color: Colors.transparent,
         borderSide: BorderSide(color: Theme.of(context).iconTheme.color),

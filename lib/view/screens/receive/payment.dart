@@ -1,8 +1,7 @@
 import 'dart:typed_data';
+import 'package:annuluswallet/model/wallet.dart';
 import 'package:annuluswallet/provider/info_display_provider.dart';
 import 'package:annuluswallet/view/components/export_components.dart';
-import 'package:annuluswallet/view/components/scan.dart';
-import 'package:annuluswallet/view/components/selected_wallet.dart';
 import 'package:esys_flutter_share/esys_flutter_share.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -10,8 +9,6 @@ import 'package:provider/provider.dart';
 import 'package:annuluswallet/model/images.dart';
 import 'package:annuluswallet/provider/walletProvider.dart';
 import 'package:annuluswallet/view/screens/main/dashboard_menu_drawer.dart';
-import 'package:annuluswallet/view/screens/receive/receive.dart';
-import 'package:annuluswallet/view/screens/receive/request_payment.dart';
 import 'package:annuluswallet/view/widget/routes.dart';
 
 import 'package:screenshot/screenshot.dart';
@@ -57,212 +54,89 @@ class _PaymentPageState extends State<PaymentPage> {
             Screenshot(
               controller: controller,
               child: Container(
-                margin: EdgeInsets.only(top: 20.0, bottom: 30.0),
+                margin: EdgeInsets.all(16.0),
                 child: SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      Text(
-                        "TO ADDRESS",
-                        style: TextStyle(
-                          fontSize: 18.0,
-                          letterSpacing: 2.0,
-                          fontWeight: FontWeight.w600,
-                          color: Theme.of(context).appBarTheme.color,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20.0,
-                      ),
+                      HeadText(text: "TO ADDRESS"),
                       SelectedWalletWithoutCloseButton(wallet: widget.wallet),
-                      SizedBox(
-                        height: 20.0,
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(right: 16.0, left: 16.0),
-                        child: Column(
-                          children: <Widget>[
-                            Align(
-                              alignment: Alignment.topRight,
-                              child: Scan(
-                                title: "COPY ADDRESS",
-                                onTap: () => clipboard.setClipboardStatus(
-                                    widget.wallet.id, true),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 20.0,
-                            ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: <Widget>[
-                                Container(
-                                  height: 150.0,
-                                  width: MediaQuery.of(context).size.width,
-                                  decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                      image: AssetImage(qrcode),
-                                      fit: BoxFit.contain,
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 20.0,
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: <Widget>[
-                                    Scan(
-                                      title: "SAVE URI",
-                                      onTap: () {},
-                                    ),
-                                    Scan(
-                                      title: "SAVE QR",
-                                      onTap: () {},
-                                    )
-                                  ],
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 30.0,
-                            ),
-                            Align(
-                              alignment: Alignment.center,
-                              child: Text(
-                                "PAYMENT INFO",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 16.0,
-                                  letterSpacing: 2.0,
-                                  color:
-                                      Theme.of(context).scaffoldBackgroundColor,
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 30.0,
-                            ),
-                            Align(
-                              alignment: Alignment.topLeft,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  paymentDetails(
-                                      context: context,
-                                      title: "Label",
-                                      details: widget.label),
-                                  SizedBox(
-                                    height: 12.0,
-                                  ),
-                                  paymentDetails(
-                                      context: context,
-                                      title: "Address",
-                                      details: widget.wallet.id),
-                                  SizedBox(
-                                    height: 12.0,
-                                  ),
-                                  paymentDetails(
-                                      context: context,
-                                      title: "Amount",
-                                      details: widget.amount),
-                                  SizedBox(
-                                    height: 12.0,
-                                  ),
-                                  paymentDetails(
-                                      context: context,
-                                      title: "Message",
-                                      details:
-                                          "Send via annuluswallet Android 17-06-2019 23:11")
-                                ],
-                              ),
-                            ),
-                            SizedBox(
-                              height: 40.0,
-                            ),
-                            InkWell(
-                              onTap: () async {
-                                controller.capture().then((image) async {
-                                  Uint8List pngBytes = image.readAsBytesSync();
-                                  await Share.file('My payment Details',
-                                      'payment.png', pngBytes, "payment/png",
-                                      text: 'My payment Details');
-                                });
-                              },
-                              child: Container(
-                                height: 50.0,
-                                decoration: BoxDecoration(
-                                    color: Theme.of(context).iconTheme.color,
-                                    borderRadius: BorderRadius.circular(10.0)),
-                                child: Center(
-                                  child: Text(
-                                    "SHARE PAYMENT",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16.0,
-                                      letterSpacing: 3.0,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 20.0,
-                            ),
-                            Container(
-                              height: 50.0,
-                              decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color: Theme.of(context).iconTheme.color,
-                                      width: 2.0),
-                                  borderRadius: BorderRadius.circular(10.0)),
-                              child: Center(
-                                child: Text(
-                                  "MAKE ANOTHER PAYMENT",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16.0,
-                                      color: Theme.of(context).iconTheme.color),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 20.0,
-                            ),
-                            InkWell(
-                              onTap: () {
-                                gotoDashBoard(
-                                    context: context, provider: provider);
-                              },
-                              child: Container(
-                                height: 50.0,
-                                decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color:
-                                            Theme.of(context).iconTheme.color,
-                                        width: 2.0),
-                                    borderRadius: BorderRadius.circular(10.0)),
-                                child: Center(
-                                  child: Text(
-                                    "DASHBOARD",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16.0,
-                                        color:
-                                            Theme.of(context).iconTheme.color),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 30.0,
-                            ),
-                          ],
+                      const EmptySpace(multiple: 2.0),
+                      Align(
+                        alignment: Alignment.topRight,
+                        child: Scan(
+                          title: "COPY ADDRESS",
+                          onTap: () => clipboard.setClipboardStatus(
+                              widget.wallet.id, true),
                         ),
+                      ),
+                      const EmptySpace(multiple: 4.0),
+                      Image.asset(qrcode, height: 150.0, width: 300.0),
+                      const EmptySpace(multiple: 2.0),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Scan(title: "SAVE URI", onTap: () {}),
+                          Scan(title: "SAVE QR", onTap: () {})
+                        ],
+                      ),
+                      const EmptySpace(multiple: 4.0),
+                      HeadText(text: "PAYMENT INFO"),
+                      const EmptySpace(multiple: 2.0),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          paymentDetails(
+                              context: context,
+                              title: "Label",
+                              details: widget.label),
+                          const EmptySpace(multiple: 1.5),
+                          paymentDetails(
+                              context: context,
+                              title: "Address",
+                              details: widget.wallet.id),
+                          const EmptySpace(multiple: 1.5),
+                          paymentDetails(
+                              context: context,
+                              title: "Amount",
+                              details: widget.amount),
+                          const EmptySpace(multiple: 1.5),
+                          paymentDetails(
+                              context: context,
+                              title: "Message",
+                              details:
+                                  "Send via annuluswallet Android 17-06-2019 23:11")
+                        ],
+                      ),
+                      EmptySpace(multiple: 6.0),
+                      Column(
+                        children: <Widget>[
+                          CustomButton(
+                            text: "SHARE PAYMENT",
+                            onPressed: () async {
+                              controller.capture().then((image) async {
+                                Uint8List pngBytes = image.readAsBytesSync();
+                                await Share.file('My payment Details',
+                                    'payment.png', pngBytes, "payment/png",
+                                    text: 'My payment Details');
+                              });
+                            },
+                          ),
+                          EmptySpace(multiple: 2.0),
+                          CustomOutlineButton(
+                            text: "MAKE ANOTHER PAYMENT",
+                            color: Theme.of(context).iconTheme.color,
+                            onPressed: () {},
+                          ),
+                          EmptySpace(multiple: 2.0),
+                          CustomOutlineButton(
+                            text: "DASHBOARD",
+                            color: Theme.of(context).iconTheme.color,
+                            onPressed: () => gotoDashBoard(
+                                context: context, provider: provider),
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -281,30 +155,21 @@ class _PaymentPageState extends State<PaymentPage> {
   }
 
   Widget paymentDetails({BuildContext context, String title, String details}) {
+    final textTheme = Theme.of(context).textTheme;
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
           title,
-          style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 16.0,
-              letterSpacing: 1.0,
-              color: Theme.of(context).scaffoldBackgroundColor),
+          style: textTheme.subtitle.copyWith(fontWeight: FontWeight.w500),
         ),
-        SizedBox(
-          height: 5.0,
-        ),
-        Container(
-          child: Text(
-            details,
-            style: TextStyle(
-              fontWeight: FontWeight.w400,
-              fontSize: 14.0,
-              letterSpacing: 1.0,
-              color: Theme.of(context).scaffoldBackgroundColor,
-            ),
+        const EmptySpace(),
+        Text(
+          details,
+          style: textTheme.caption.copyWith(
+            color: Theme.of(context).scaffoldBackgroundColor,
+            letterSpacing: 1.0,
           ),
         )
       ],

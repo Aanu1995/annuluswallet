@@ -1,17 +1,18 @@
+import 'package:annuluswallet/model/wallet.dart';
 import 'package:annuluswallet/view/components/empty_space.dart';
 import 'package:flutter/material.dart';
 import 'package:annuluswallet/model/images.dart';
-import 'package:annuluswallet/view/screens/receive/receive.dart';
 
 class SelectedWalletWithoutCloseButton extends StatelessWidget {
   final Wallet wallet;
   SelectedWalletWithoutCloseButton({this.wallet});
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
     return Container(
       alignment: AlignmentDirectional.topCenter,
-      padding: EdgeInsets.only(left: 8.0, right: 8.0, top: 10.0, bottom: 5.0),
-      width: MediaQuery.of(context).size.width,
+      padding: EdgeInsets.symmetric(vertical: 16.0),
+      width: double.maxFinite,
       color: Colors.transparent,
       child: Column(
         children: <Widget>[
@@ -19,46 +20,48 @@ class SelectedWalletWithoutCloseButton extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              SizedBox(
-                width: 10.0,
-              ),
-              Image.asset(walletTrans),
-              SizedBox(
-                width: 16.0,
-              ),
+              Image.asset(walletTrans, height: 25.0, width: 25.0),
+              const EmptySpace(multiple: 2.5),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
                       "${wallet.walletType}",
-                      style: TextStyle(
-                        fontSize: 21.0,
-                        color: Theme.of(context).appBarTheme.color,
-                        fontWeight: FontWeight.w600,
+                      style: textTheme.subtitle,
+                    ),
+                    SizedBox(
+                      height: 5.0,
+                    ),
+                    RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text:
+                                "${wallet.formattedAmount.substring(0, wallet.formattedAmount.length - 3)}",
+                            style: TextStyle(
+                              fontSize: 18.0,
+                              color: Theme.of(context).appBarTheme.color,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          TextSpan(
+                            text:
+                                "${wallet.formattedAmount.substring(wallet.formattedAmount.length - 3)}",
+                            style: TextStyle(
+                              fontSize: 13.0,
+                              color: Theme.of(context).appBarTheme.color,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                    SizedBox(
-                      height: 5.0,
-                    ),
+                    EmptySpace(multiple: 0.6),
                     Text(
-                      "${wallet.formattedAmount}",
-                      style: TextStyle(
-                          fontSize: 21.0,
-                          color: Theme.of(context).appBarTheme.color,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(
-                      height: 5.0,
-                    ),
-                    Container(
-                      child: Text(
-                        "${wallet.id}",
-                        style: TextStyle(
-                          fontSize: 14.0,
-                          letterSpacing: 0.8,
-                          color: Theme.of(context).appBarTheme.color,
-                        ),
+                      "${wallet.id}",
+                      style: textTheme.caption.copyWith(
+                        letterSpacing: 1.2,
                       ),
                     ),
                   ],
@@ -98,7 +101,7 @@ class SelectedWallet extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               Image.asset(walletTrans, height: 25.0, width: 25.0),
-              EmptySpace(multiple: 2.5),
+              const EmptySpace(multiple: 2.5),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -107,7 +110,7 @@ class SelectedWallet extends StatelessWidget {
                       "${wallet.walletType}",
                       style: textTheme.subtitle,
                     ),
-                    EmptySpace(multiple: 0.8),
+                    const EmptySpace(multiple: 0.8),
                     RichText(
                       text: TextSpan(
                         children: [
@@ -132,12 +135,10 @@ class SelectedWallet extends StatelessWidget {
                         ],
                       ),
                     ),
-                    EmptySpace(multiple: 0.8),
-                    Container(
-                      child: Text(
-                        "${wallet.id}",
-                        style: textTheme.caption,
-                      ),
+                    const EmptySpace(multiple: 0.8),
+                    Text(
+                      "${wallet.id}",
+                      style: textTheme.caption,
                     ),
                   ],
                 ),

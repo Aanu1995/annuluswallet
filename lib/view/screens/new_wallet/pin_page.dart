@@ -3,7 +3,6 @@ import 'package:annuluswallet/view/components/export_components.dart';
 import 'package:flutter/material.dart';
 import 'package:annuluswallet/model/colors.dart';
 import 'package:annuluswallet/view/screens/new_wallet/confirm_pin.dart';
-import 'package:annuluswallet/view/screens/pin_creation_screen/pin_code_view.dart';
 
 class PinPage extends StatelessWidget {
   @override

@@ -1,8 +1,8 @@
+import 'package:annuluswallet/model/wallet.dart';
 import 'package:annuluswallet/router/router.dart';
 import 'package:flutter/material.dart';
 import 'package:annuluswallet/model/images.dart';
 import 'package:annuluswallet/view/screens/manage%20wallet/create_new_wallet.dart';
-import 'package:annuluswallet/view/screens/receive/receive.dart';
 import 'package:annuluswallet/view/screens/transfer/transfer_page.dart';
 import 'package:annuluswallet/view/widget/app_bar.dart';
 import 'package:annuluswallet/view/widget/common.dart';

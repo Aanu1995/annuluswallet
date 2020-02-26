@@ -1,7 +1,7 @@
+import 'package:annuluswallet/model/wallet.dart';
+import 'package:annuluswallet/router/router.dart';
 import 'package:annuluswallet/view/components/export_components.dart';
-import 'package:annuluswallet/view/components/get_wallet.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_money_formatter/flutter_money_formatter.dart';
 import 'package:annuluswallet/view/screens/receive/request_payment.dart';
 
 class ReceivePage extends StatelessWidget {
@@ -17,7 +17,7 @@ class ReceivePage extends StatelessWidget {
         ),
       ),
       body: Container(
-        margin: EdgeInsets.only(top: 10.0, bottom: 30.0),
+        margin: EdgeInsets.only(top: 10.0, bottom: 10.0),
         child: SingleChildScrollView(
           child: WalletItem(),
         ),
@@ -38,47 +38,18 @@ class WalletItem extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-        SizedBox(
-          height: 20.0,
-        ),
-        Text(
-          "TO ADDRESS",
-          style: TextStyle(
-            fontSize: 18.0,
-            letterSpacing: 2.0,
-            color: Colors.black,
-          ),
-        ),
-        SizedBox(
-          height: 30.0,
-        ),
+        HeadText(text: "TO ADDRESS"),
         for (int i = 0; i < list.length; i++)
           GetWallet(
             wallet: list[i],
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => RequestPaymentPage(
-                    wallet: list[i],
-                  ),
-                ),
-              );
-            },
+            onTap: () => Router.goToWidget(
+              context: context,
+              page: RequestPaymentPage(
+                wallet: list[i],
+              ),
+            ),
           )
       ],
     );
-  }
-}
-
-class Wallet {
-  String walletType;
-  double amount;
-  String id;
-  String formattedAmount;
-
-  Wallet(this.walletType, this.amount, this.id) {
-    FlutterMoneyFormatter fmf = FlutterMoneyFormatter(amount: amount);
-    this.formattedAmount = fmf.output.nonSymbol;
   }
 }

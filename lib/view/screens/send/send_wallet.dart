@@ -1,13 +1,10 @@
+import 'package:annuluswallet/model/wallet.dart';
 import 'package:annuluswallet/view/components/export_components.dart';
-import 'package:annuluswallet/view/components/scan.dart';
-import 'package:annuluswallet/view/components/selected_wallet.dart';
-import 'package:annuluswallet/view/screens/send/components/head_text.dart';
 import 'package:flutter/material.dart';
 
 import 'package:majascan/majascan.dart';
 import 'package:provider/provider.dart';
 import 'package:annuluswallet/provider/walletProvider.dart';
-import 'package:annuluswallet/view/screens/receive/receive.dart';
 import 'package:annuluswallet/view/screens/send/send_confirm_payment.dart';
 import 'package:annuluswallet/view/screens/transfer/function_widget.dart';
 import 'package:annuluswallet/router/router.dart';
@@ -28,25 +25,8 @@ class _SendWalletState extends State<SendWallet> {
   bool isScanned = false;
 
   FocusNode labelFocus = FocusNode();
-  bool isLabelFocus = false;
   FocusNode addressFocus = FocusNode();
-  bool isAddressFocus = false;
   FocusNode amountFocus = FocusNode();
-  bool isAmountFocus = false;
-
-  @override
-  void initState() {
-    super.initState();
-    labelFocus.addListener(() {
-      isLabelFocus = labelFocus.hasFocus;
-    });
-    addressFocus.addListener(() {
-      isAddressFocus = addressFocus.hasFocus;
-    });
-    amountFocus.addListener(() {
-      isAmountFocus = amountFocus.hasFocus;
-    });
-  }
 
   @override
   void dispose() {
@@ -74,7 +54,7 @@ class _SendWalletState extends State<SendWallet> {
       ),
       body: SingleChildScrollView(
         child: Container(
-          margin: EdgeInsets.all(8.0),
+          margin: EdgeInsets.all(16.0),
           child: Column(
             children: <Widget>[
               HeadText(),
@@ -101,7 +81,7 @@ class _SendWalletState extends State<SendWallet> {
                         FocusScope.of(context).requestFocus(amountFocus);
                       },
                     ),
-                    EmptySpace(multiple: 2.0),
+                    const EmptySpace(multiple: 2.0),
                     Align(
                       alignment: Alignment.topRight,
                       child: Scan(
@@ -123,7 +103,7 @@ class _SendWalletState extends State<SendWallet> {
                         },
                       ),
                     ),
-                    EmptySpace(multiple: 4.0),
+                    const EmptySpace(multiple: 4.0),
                     TextField(
                       controller: amountController,
                       keyboardType: TextInputType.number,
@@ -139,7 +119,7 @@ class _SendWalletState extends State<SendWallet> {
                         FocusScope.of(context).requestFocus(labelFocus);
                       },
                     ),
-                    EmptySpace(multiple: 3.0),
+                    const EmptySpace(multiple: 3.0),
                     TextField(
                       controller: labelController,
                       focusNode: labelFocus,
@@ -150,7 +130,7 @@ class _SendWalletState extends State<SendWallet> {
                         labelText: "Label (Optional)",
                       ),
                     ),
-                    EmptySpace(multiple: 4.0),
+                    const EmptySpace(multiple: 4.0),
                     CustomButton(
                       text: "REQUEST PAYMENT",
                       onPressed: () => Router.goToWidget(
@@ -163,7 +143,7 @@ class _SendWalletState extends State<SendWallet> {
                         ),
                       ),
                     ),
-                    EmptySpace(multiple: 2.0),
+                    const EmptySpace(multiple: 2.0),
                     CustomOutlineButton(
                       text: "CANCEL",
                       color: Theme.of(context).iconTheme.color,
@@ -172,7 +152,6 @@ class _SendWalletState extends State<SendWallet> {
                             context: context, provider: provider);
                       },
                     ),
-                    EmptySpace(multiple: 2.0)
                   ],
                 ),
               )

@@ -1,8 +1,8 @@
+import 'package:annuluswallet/model/wallet.dart';
 import 'package:annuluswallet/view/components/export_components.dart';
 import 'package:annuluswallet/view/components/get_wallet.dart';
 import 'package:annuluswallet/view/components/selected_wallet.dart';
 import 'package:flutter/material.dart';
-import 'package:annuluswallet/view/screens/receive/receive.dart';
 import 'package:annuluswallet/view/screens/transfer/from_to_address.dart';
 
 class TransferPage extends StatelessWidget {

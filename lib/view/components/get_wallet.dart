@@ -1,7 +1,7 @@
+import 'package:annuluswallet/model/wallet.dart';
 import 'package:annuluswallet/view/components/empty_space.dart';
 import 'package:flutter/material.dart';
 import 'package:annuluswallet/model/images.dart';
-import 'package:annuluswallet/view/screens/receive/receive.dart';
 
 class GetWallet extends StatelessWidget {
   final Wallet wallet;
