@@ -1,4 +1,3 @@
-import 'package:annuluswallet/view/screens/receive/receive.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter/services.dart';
@@ -47,7 +46,6 @@ class MyApp extends StatelessWidget {
             color: ColorUtils.BOTTOM_APPBAR_COLOR,
           ),
         ),
-        // home: ReceivePage(),
         routes: Routes.getRoutes,
       ),
     );
