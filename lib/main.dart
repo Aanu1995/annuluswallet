@@ -1,4 +1,3 @@
-import 'package:annuluswallet/view/screens/main/dashboard.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter/services.dart';
@@ -47,8 +46,7 @@ class MyApp extends StatelessWidget {
             color: ColorUtils.BOTTOM_APPBAR_COLOR,
           ),
         ),
-        home: DashBoardPage(),
-        // routes: Routes.getRoutes,
+        routes: Routes.getRoutes,
       ),
     );
   }
