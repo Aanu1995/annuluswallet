@@ -1,4 +1,3 @@
-import 'package:annuluswallet/router/router.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -228,11 +227,7 @@ class _Item extends StatelessWidget {
                   ),
                 ],
               ),
-        onTap: () {
-          Router.goBack(context: context);
-          provider.setIndex = index;
-          Router.removeWidget(context: context, page: page);
-        },
+        onTap: () {},
       ),
     );
   }
@@ -290,15 +285,7 @@ class _SpecialItem extends StatelessWidget {
                   )
                 ],
               ),
-        onTap: () {
-          Router.goBack(context: context);
-          provider.setIndex = index;
-          if (index == 3) {
-            Router.goToWidget(context: context, page: page);
-            return;
-          }
-          Router.removeWidget(context: context, page: page);
-        },
+        onTap: () {},
       ),
     );
   }

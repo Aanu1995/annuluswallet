@@ -41,7 +41,7 @@ class CustomPageRoute extends PageRoute {
   }
 
   @override
-  Duration get transitionDuration => Duration(milliseconds: 1000);
+  Duration get transitionDuration => Duration(milliseconds: 500);
 
   @override
   bool get maintainState => false;

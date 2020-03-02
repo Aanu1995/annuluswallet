@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import 'package:annuluswallet/model/images.dart';
@@ -29,6 +28,12 @@ class _DashBoardPageState extends State<DashBoardPage>
   }
 
   @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _globalKey,
@@ -36,14 +41,13 @@ class _DashBoardPageState extends State<DashBoardPage>
         preferredSize: Size(double.maxFinite, 80.0),
         child: _tabController.index == 0
             ? DashboardAppBar(globalKey: _globalKey)
-            : TransactionAppBar(title: "All Transactions"),
+            : TransactionAppBar(title: "All Transactions", leadingIcon: false),
       ),
       body: Container(
         margin: EdgeInsets.only(bottom: 16.0),
         child: TabBarView(
           controller: _tabController,
           physics: NeverScrollableScrollPhysics(),
-          dragStartBehavior: DragStartBehavior.down,
           children: [
             _tabController.index == 0
                 ? DashboardMainScreen()

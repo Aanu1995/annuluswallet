@@ -1,11 +1,9 @@
-import 'package:annuluswallet/view/screens/new_wallet/micro_loading.dart';
 import 'package:flutter/material.dart';
 
 import 'package:annuluswallet/provider/info_display_provider.dart';
 import 'package:annuluswallet/router/router.dart';
 import 'package:annuluswallet/model/images.dart';
 import 'package:annuluswallet/view/components/export_components.dart';
-import 'package:annuluswallet/view/screens/restore_wallet/restore_mnemonic_match.dart';
 import 'package:provider/provider.dart';
 
 class WalletDecisionPage extends StatelessWidget {
@@ -61,16 +59,7 @@ class _DecisionPage extends StatelessWidget {
                       ),
                     ),
                     EmptySpace(multiple: 2.0),
-                    CustomButton(
-                      text: "RESTORE A WALLET",
-                      onPressed: () => Router.goToWidget(
-                        context: context,
-                        page: MicroLoading(
-                          text: "Welcome back...",
-                          page: RestoreMnemonicMatchPage(),
-                        ),
-                      ),
-                    ),
+                    CustomButton(text: "RESTORE A WALLET", onPressed: () {}),
                     EmptySpace(multiple: 3.0),
                     const _Information(),
                   ],

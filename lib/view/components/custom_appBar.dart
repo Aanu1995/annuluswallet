@@ -165,8 +165,14 @@ class TransactionAppBar extends StatelessWidget {
   final String subtitle;
   final icon;
   final globalKey;
-  const TransactionAppBar(
-      {this.title, this.subtitle, this.icon, this.globalKey});
+  final bool leadingIcon;
+  const TransactionAppBar({
+    this.title,
+    this.subtitle,
+    this.icon,
+    this.globalKey,
+    this.leadingIcon = true,
+  });
   @override
   Widget build(BuildContext context) {
     final primaryTheme = Theme.of(context).primaryTextTheme;
@@ -179,17 +185,19 @@ class TransactionAppBar extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              InkWell(
-                child: Image.asset(
-                  icon ?? leftArrow,
-                  color: Theme.of(context).iconTheme.color,
-                  height: 28.0,
-                  width: 28.0,
-                ),
-                onTap: () => globalKey == null
-                    ? Router.goBack(context: context)
-                    : globalKey.currentState.openDrawer(),
-              ),
+              leadingIcon
+                  ? InkWell(
+                      child: Image.asset(
+                        icon ?? leftArrow,
+                        color: Theme.of(context).iconTheme.color,
+                        height: 28.0,
+                        width: 28.0,
+                      ),
+                      onTap: () => globalKey == null
+                          ? Router.goBack(context: context)
+                          : globalKey.currentState.openDrawer(),
+                    )
+                  : Offstage(),
               Spacer(),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,

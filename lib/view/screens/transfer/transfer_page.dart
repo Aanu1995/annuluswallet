@@ -18,7 +18,7 @@ class TransferPage extends StatelessWidget {
         ),
       ),
       body: Container(
-        margin: EdgeInsets.only(top: 10.0, bottom: 30.0),
+        margin: EdgeInsets.only(top: 10.0, bottom: 10.0),
         child: SingleChildScrollView(
           child: FromWallet(),
         ),
@@ -61,11 +61,11 @@ class FromWallet extends StatelessWidget {
             wallet: list[i],
             onTap: () {
               Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => ToWallet(
-                            wallet: list[i],
-                          )));
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ToWallet(wallet: list[i]),
+                ),
+              );
             },
           )
       ],
@@ -92,57 +92,31 @@ class ToWallet extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            SizedBox(
-              height: 20.0,
-            ),
-            Text(
-              "FROM ADDRESS",
-              style: TextStyle(
-                fontSize: 18.0,
-                letterSpacing: 2.0,
-                color: color,
-              ),
-            ),
-            SizedBox(
-              height: 20.0,
-            ),
+            HeadText(text: "FROM ADDRESS"),
             SelectedWallet(
               wallet: wallet,
               onPressed: () {
                 Navigator.pop(context);
               },
             ),
-            SizedBox(
-              height: 20.0,
-            ),
-            Text(
-              "TO ADDRESS",
-              style: TextStyle(
-                fontSize: 18.0,
-                letterSpacing: 2.0,
-                color: color,
-              ),
-            ),
-            SizedBox(
-              height: 20.0,
-            ),
+            HeadText(text: "TO ADDRESS"),
             for (int i = 0; i < list.length; i++)
               if (list[i].walletType != wallet.walletType)
                 GetWallet(
                   wallet: list[i],
                   onTap: () {
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => FromWalletToSendWallet(
-                                  fromWallet: wallet,
-                                  toWallet: list[i],
-                                )));
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => FromWalletToSendWallet(
+                          fromWallet: wallet,
+                          toWallet: list[i],
+                        ),
+                      ),
+                    );
                   },
                 ),
-            SizedBox(
-              height: 30.0,
-            ),
+            EmptySpace(multiple: 2.0),
           ],
         ),
       ),

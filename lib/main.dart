@@ -1,3 +1,4 @@
+import 'package:annuluswallet/view/screens/main/dashboard.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter/services.dart';
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
     );
     return BaseProvider(
       child: MaterialApp(
-        title: 'Annulus',
+        title: 'Annulus Wallet',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primaryColor: ColorUtils.PRIMARY_COLOR,
@@ -46,7 +47,8 @@ class MyApp extends StatelessWidget {
             color: ColorUtils.BOTTOM_APPBAR_COLOR,
           ),
         ),
-        routes: Routes.getRoutes,
+        home: DashBoardPage(),
+        // routes: Routes.getRoutes,
       ),
     );
   }
