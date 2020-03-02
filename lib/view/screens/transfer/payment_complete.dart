@@ -1,3 +1,4 @@
+import 'package:annuluswallet/view/components/export_components.dart';
 import 'package:annuluswallet/view/widget/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -5,8 +6,6 @@ import 'package:provider/provider.dart';
 import 'package:annuluswallet/model/colors.dart';
 import 'package:annuluswallet/model/images.dart';
 import 'package:annuluswallet/provider/walletProvider.dart';
-import 'package:annuluswallet/view/screens/main/dashboard_menu_drawer.dart';
-import 'package:annuluswallet/view/widget/common.dart';
 
 class PaymentComplete extends StatelessWidget {
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey();
@@ -31,91 +30,72 @@ class PaymentComplete extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     DashboardProvider provider = Provider.of<DashboardProvider>(context);
+    final textTheme = Theme.of(context).textTheme;
+    final style1 = textTheme.subtitle.copyWith(
+      fontWeight: FontWeight.bold,
+      letterSpacing: 1.0,
+      color: Theme.of(context).scaffoldBackgroundColor,
+    );
+    final style2 = textTheme.caption.copyWith(
+      fontWeight: FontWeight.w500,
+      letterSpacing: 1.0,
+      color: Theme.of(context).scaffoldBackgroundColor,
+    );
     return SafeArea(
       child: Scaffold(
         key: _globalKey,
         appBar: PreferredSize(
-          preferredSize: Size(MediaQuery.of(context).size.width, 80),
+          preferredSize: Size(MediaQuery.of(context).size.width, 70),
           child: Container(
             alignment: Alignment.center,
             decoration: BoxDecoration(
-                color: darkBlue,
-                borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(10),
-                    bottomRight: Radius.circular(10.0))),
-            child: Container(
-              margin: EdgeInsets.symmetric(horizontal: 16.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  InkWell(
-                    child: Image.asset(
-                      drawer,
-                      height: 25.0,
-                      width: 25.0,
-                    ),
-                    onTap: () {
-                      _globalKey.currentState.openDrawer();
-                    },
-                  ),
-                  SizedBox(
-                    width: 30.0,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        height: 50.0,
-                        width: 50.0,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage(copy),
-                            fit: BoxFit.contain,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 20.0,
-                      ),
-                      Text(
-                        "Payment Complete!",
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 18.0,
-                          letterSpacing: 1.0,
-                          color: dash,
-                        ),
-                      ),
-                    ],
-                  )
-                ],
+              color: darkBlue,
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(10),
+                bottomRight: Radius.circular(10.0),
               ),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                  height: 45.0,
+                  width: 45.0,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage(copy),
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                ),
+                EmptySpace(horizontal: true, multiple: 2.5),
+                Text(
+                  "Payment Complete!",
+                  style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 17.0,
+                    letterSpacing: 1.0,
+                    color: dash,
+                  ),
+                ),
+              ],
             ),
           ),
         ),
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
           child: Container(
-            margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
+            margin: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Align(
                   alignment: Alignment.center,
-                  child: Text(
-                    "PAYMENT INFO",
-                    style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 16.0,
-                      letterSpacing: 2.0,
-                      color: Theme.of(context).scaffoldBackgroundColor,
-                    ),
+                  child: HeadText(
+                    text: "PAYMENT INFO",
                   ),
                 ),
-                SizedBox(
-                  height: 30.0,
-                ),
+                const EmptySpace(multiple: 4.0),
                 Container(
                   alignment: Alignment.topLeft,
                   child: Column(
@@ -123,219 +103,66 @@ class PaymentComplete extends StatelessWidget {
                     children: <Widget>[
                       // For the status starts here ->----------------------------
                       paymentDetails(
-                          context: context,
-                          title: "Status",
-                          details: "1/12 Confirmations"),
-                      SizedBox(
-                        height: 20.0,
+                        context: context,
+                        title: "Status",
+                        details: "1/12 Confirmations",
                       ),
+                      EmptySpace(multiple: 2.0),
                       //for the Date and Time Starts here ->-----------------------------
                       paymentDetails(
-                          context: context,
-                          title: "Date and Time",
-                          details: "$date $time"),
-                      SizedBox(
-                        height: 20.0,
+                        context: context,
+                        title: "Date and Time",
+                        details: "$date $time",
                       ),
+                      EmptySpace(multiple: 2.0),
                       // For the from wallet starts here ->------------------------------------
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            "From",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16.0,
-                                letterSpacing: 1.0,
-                                color:
-                                    Theme.of(context).scaffoldBackgroundColor),
-                          ),
-                          SizedBox(
-                            height: 5.0,
-                          ),
-                          Container(
-                            child: Text(
-                              "Name: " + walletName,
-                              style: TextStyle(
-                                fontWeight: FontWeight.w400,
-                                fontSize: 16.0,
-                                letterSpacing: 1.0,
-                                color:
-                                    Theme.of(context).scaffoldBackgroundColor,
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 5.0,
-                          ),
-                          Container(
-                            child: Text(
-                              fromAddress,
-                              style: TextStyle(
-                                fontWeight: FontWeight.w400,
-                                fontSize: 16.0,
-                                letterSpacing: 1.0,
-                                color:
-                                    Theme.of(context).scaffoldBackgroundColor,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 20.0,
-                      ),
+                      Text("From", style: style1),
+                      EmptySpace(multiple: 0.6),
+                      Text("Name: " + walletName, style: style2),
+                      EmptySpace(multiple: 2.0),
                       //for the To wallet starts here ->--------------------------------
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            "To",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16.0,
-                                letterSpacing: 1.0,
-                                color:
-                                    Theme.of(context).scaffoldBackgroundColor),
-                          ),
-                          SizedBox(
-                            height: 5.0,
-                          ),
-                          Container(
-                            child: Text(
-                              toAddress,
-                              style: TextStyle(
-                                fontWeight: FontWeight.w400,
-                                fontSize: 16.0,
-                                letterSpacing: 1.0,
-                                color:
-                                    Theme.of(context).scaffoldBackgroundColor,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 20.0,
-                      ),
+                      Text("To", style: style1),
+                      EmptySpace(multiple: 0.6),
+                      Text(toAddress, style: style2),
                       //for the label starts here ->---------------------------------
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      EmptySpace(multiple: 2.0),
+                      Row(
                         children: <Widget>[
-                          Row(
-                            children: <Widget>[
-                              Text(
-                                "Label",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16.0,
-                                    letterSpacing: 1.0,
-                                    color: Theme.of(context)
-                                        .scaffoldBackgroundColor),
-                              ),
-                              SizedBox(
-                                width: 5.0,
-                              ),
-                              Text(
-                                "(Optional)",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 16.0,
-                                  letterSpacing: 1.0,
-                                  color:
-                                      Theme.of(context).scaffoldBackgroundColor,
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 5.0,
-                          ),
-                          Container(
-                            child: Text(
-                              label,
-                              style: TextStyle(
-                                fontWeight: FontWeight.w400,
-                                fontSize: 16.0,
-                                letterSpacing: 1.0,
-                                color:
-                                    Theme.of(context).scaffoldBackgroundColor,
-                              ),
-                            ),
-                          ),
+                          Text("Label", style: style1),
+                          EmptySpace(multiple: 0.6),
+                          Text("(Optional)", style: style2),
                         ],
                       ),
-                      SizedBox(
-                        height: 20.0,
-                      ),
+                      EmptySpace(multiple: 0.6),
+                      Text(label, style: style2),
+                      EmptySpace(multiple: 2.0),
                       // for thr net amount starts here ->---------------------------------------
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            "Net Amount",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16.0,
-                                letterSpacing: 1.0,
-                                color:
-                                    Theme.of(context).scaffoldBackgroundColor),
-                          ),
-                          SizedBox(
-                            height: 5.0,
-                          ),
-                          Container(
-                            child: Text(
-                              "+2140.4112000000 RPD",
-                              style: TextStyle(
-                                fontWeight: FontWeight.w400,
-                                fontSize: 16.0,
-                                letterSpacing: 1.0,
-                                color:
-                                    Theme.of(context).scaffoldBackgroundColor,
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 5.0,
-                          ),
-                          Container(
-                            child: Text(
-                              "Credit:" + " 2140.4112000000 RPD",
-                              style: TextStyle(
-                                fontWeight: FontWeight.w400,
-                                fontSize: 16.0,
-                                letterSpacing: 1.0,
-                                color:
-                                    Theme.of(context).scaffoldBackgroundColor,
-                              ),
-                            ),
-                          )
-                        ],
+                      Text("Net Amount", style: style1),
+                      EmptySpace(multiple: 0.6),
+                      Text("+2140.4112000000 RPD", style: style2),
+                      EmptySpace(multiple: 0.6),
+                      Text(
+                        "Credit:" + " 2140.4112000000 RPD",
+                        style: style2,
                       ),
-                      SizedBox(
-                        height: 20.0,
-                      ),
+                      EmptySpace(multiple: 2.0),
                       // for the transaction ID starts here ->----------------------------------------
-                      paymentDetails(
-                          context: context,
-                          title: "Transaction ID",
-                          details: transactionId),
-                      SizedBox(
-                        height: 30.0,
-                      ),
                     ],
                   ),
                 ),
-                ButtonFilled(
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 12.0),
+                  child: paymentDetails(
+                    context: context,
+                    title: "Transaction ID",
+                    details: transactionId,
+                  ),
+                ),
+                CustomButton(
                   text: "VIEW TRANSACTION ID",
-                  height: 50.0,
-                  margin: EdgeInsets.all(0.0),
-                  onTap: () {},
+                  onPressed: () {},
                 ),
-                SizedBox(
-                  height: 30.0,
-                ),
+                EmptySpace(multiple: 3.0),
                 Container(
                   alignment: Alignment.topLeft,
                   margin: EdgeInsets.symmetric(horizontal: 12.0),
@@ -347,123 +174,77 @@ class PaymentComplete extends StatelessWidget {
                           title: "Message",
                           details:
                               "Send via annuluswallet Android 17-06-2019 23:11"),
-                      SizedBox(
-                        height: 20,
-                      ),
+                      EmptySpace(multiple: 2.0),
                       Row(
                         children: <Widget>[
-                          Text(
-                            "Output Index",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16.0,
-                                letterSpacing: 1.0,
-                                color:
-                                    Theme.of(context).scaffoldBackgroundColor),
-                          ),
-                          Text(
-                            ":",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color:
-                                    Theme.of(context).scaffoldBackgroundColor),
-                          ),
-                          SizedBox(
-                            width: 5.0,
-                          ),
-                          Text(
-                            "0",
-                            style: TextStyle(
-                                fontSize: 16.0,
-                                color:
-                                    Theme.of(context).scaffoldBackgroundColor),
-                          ),
+                          Text("Output Index:", style: style1),
+                          EmptySpace(multiple: 0.6),
+                          Text("0", style: style2)
                         ],
                       ),
-                      SizedBox(
-                        height: 20.0,
-                      ),
+                      EmptySpace(multiple: 2.0),
                       Row(
                         children: <Widget>[
-                          Text(
-                            "Powered by",
-                            style: TextStyle(
-                                fontSize: 16.0,
-                                color:
-                                    Theme.of(context).scaffoldBackgroundColor),
-                          ),
-                          SizedBox(
-                            width: 5.0,
-                          ),
+                          Text("Powered by", style: style1),
+                          EmptySpace(multiple: 0.6),
                           Text(
                             "annuluswalletNetwork.io",
                             style: TextStyle(
-                                fontSize: 16.0,
+                                fontSize: 13.0,
                                 fontWeight: FontWeight.bold,
                                 color: Theme.of(context).iconTheme.color),
                           ),
                         ],
                       ),
-                      SizedBox(
-                        height: 40.0,
-                      ),
+                      EmptySpace(multiple: 3.0),
                     ],
                   ),
                 ),
                 if (isSend)
-                  ButtonFilled(
-                    text: "SHARE PAYMENT",
-                    height: 50.0,
-                    margin: EdgeInsets.all(0.0),
-                    onTap: () {},
+                  Container(
+                    margin: EdgeInsets.only(bottom: 16.0),
+                    child: CustomButton(
+                      text: "SHARE PAYMENT",
+                      onPressed: () {},
+                    ),
                   ),
-                if (isSend)
-                  SizedBox(
-                    height: 20.0,
-                  ),
-                ButtonNotFilled(
+                CustomOutlineButton(
+                  color: Theme.of(context).iconTheme.color,
                   text: "HOME",
-                  margin: EdgeInsets.all(0.0),
-                  height: 50.0,
-                  onTap: () {
+                  onPressed: () {
                     gotoDashBoard(context: context, provider: provider);
                   },
                 ),
+                EmptySpace(),
               ],
             ),
           ),
         ),
-        drawer: SpecialMenu(),
       ),
     );
   }
 
   // This widget dispalys the details from the payment
   Widget paymentDetails({BuildContext context, String title, String details}) {
+    final textTheme = Theme.of(context).textTheme;
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
           title,
-          style: TextStyle(
+          style: textTheme.subtitle.copyWith(
               fontWeight: FontWeight.bold,
-              fontSize: 16.0,
               letterSpacing: 1.0,
               color: Theme.of(context).scaffoldBackgroundColor),
         ),
-        SizedBox(
-          height: 5.0,
-        ),
-        Container(
-          child: Text(
-            details,
-            style: TextStyle(
-              fontWeight: FontWeight.w400,
-              fontSize: 16.0,
-              letterSpacing: 1.0,
-              color: Theme.of(context).scaffoldBackgroundColor,
-            ),
+        EmptySpace(multiple: 0.6),
+        Text(
+          details,
+          style: textTheme.caption.copyWith(
+            fontWeight: FontWeight.w500,
+            letterSpacing: 1.0,
+            color: Theme.of(context).scaffoldBackgroundColor,
           ),
         )
       ],

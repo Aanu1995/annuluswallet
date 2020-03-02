@@ -42,20 +42,7 @@ class FromWallet extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-        SizedBox(
-          height: 20.0,
-        ),
-        Text(
-          "FROM ADDRESS",
-          style: TextStyle(
-            fontSize: 18.0,
-            letterSpacing: 2.0,
-            color: color,
-          ),
-        ),
-        SizedBox(
-          height: 30.0,
-        ),
+        HeadText(),
         for (int i = 0; i < list.length; i++)
           GetWallet(
             wallet: list[i],
@@ -63,7 +50,9 @@ class FromWallet extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ToWallet(wallet: list[i]),
+                  builder: (context) => ToWallet(
+                    wallet: list[i],
+                  ),
                 ),
               );
             },
@@ -92,7 +81,7 @@ class ToWallet extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            HeadText(text: "FROM ADDRESS"),
+            HeadText(),
             SelectedWallet(
               wallet: wallet,
               onPressed: () {

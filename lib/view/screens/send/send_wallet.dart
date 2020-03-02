@@ -18,18 +18,32 @@ class SendWallet extends StatefulWidget {
 }
 
 class _SendWalletState extends State<SendWallet> {
-  TextEditingController labelController = TextEditingController();
-  TextEditingController addressController = TextEditingController();
-  TextEditingController amountController = TextEditingController();
+  TextEditingController labelController;
+  TextEditingController addressController;
+  TextEditingController amountController;
   final Color color = Colors.black;
   bool isScanned = false;
 
-  FocusNode labelFocus = FocusNode();
-  FocusNode addressFocus = FocusNode();
-  FocusNode amountFocus = FocusNode();
+  FocusNode labelFocus;
+  FocusNode addressFocus;
+  FocusNode amountFocus;
+
+  @override
+  void initState() {
+    super.initState();
+    labelController = TextEditingController();
+    amountController = TextEditingController();
+    addressController = TextEditingController();
+    labelFocus = FocusNode();
+    addressFocus = FocusNode();
+    amountFocus = FocusNode();
+  }
 
   @override
   void dispose() {
+    labelController.dispose();
+    addressController.dispose();
+    amountController.dispose();
     labelFocus.dispose();
     addressFocus.dispose();
     amountFocus.dispose();

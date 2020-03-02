@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:annuluswallet/provider/walletProvider.dart';
 import 'package:annuluswallet/view/screens/transfer/function_widget.dart';
 import 'package:annuluswallet/view/screens/transfer/transfer_confirm_payment.dart';
-import 'package:annuluswallet/view/widget/common.dart';
 import 'package:provider/provider.dart';
 
 class FromWalletToSendWallet extends StatefulWidget {
@@ -21,29 +20,24 @@ class FromWalletToSendWallet extends StatefulWidget {
 
 class _FromWalletToSendWalletState extends State<FromWalletToSendWallet> {
   final Color color = Colors.black;
-  TextEditingController labelController = TextEditingController();
-  TextEditingController amountController = TextEditingController();
-  bool isValidateLabel;
-  bool isValidateAmount;
-  FocusNode labelFocus = FocusNode();
-  bool isLabelFocus = false;
-  FocusNode amountFocus = FocusNode();
-  bool isAmountFocus = false;
-  bool status = false;
+  TextEditingController labelController;
+  TextEditingController amountController;
+  FocusNode labelFocus;
+  FocusNode amountFocus;
 
   @override
   void initState() {
     super.initState();
-    labelFocus.addListener(() {
-      isLabelFocus = labelFocus.hasFocus;
-    });
-    amountFocus.addListener(() {
-      isAmountFocus = amountFocus.hasFocus;
-    });
+    labelController = TextEditingController();
+    amountController = TextEditingController();
+    labelFocus = FocusNode();
+    amountFocus = FocusNode();
   }
 
   @override
   void dispose() {
+    labelController.dispose();
+    amountController.dispose();
     labelFocus.dispose();
     amountFocus.dispose();
     super.dispose();
@@ -52,6 +46,10 @@ class _FromWalletToSendWalletState extends State<FromWalletToSendWallet> {
   @override
   Widget build(BuildContext context) {
     DashboardProvider provider = Provider.of<DashboardProvider>(context);
+    final borderColor = Theme.of(context).iconTheme.color;
+    final border = OutlineInputBorder(
+      borderSide: BorderSide(color: borderColor, width: 1.5),
+    );
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: PreferredSize(
@@ -62,246 +60,75 @@ class _FromWalletToSendWalletState extends State<FromWalletToSendWallet> {
         ),
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            SizedBox(
-              height: 20.0,
-            ),
-            Text(
-              "FROM ADDRESS",
-              style: TextStyle(
-                fontSize: 18.0,
-                letterSpacing: 2.0,
-                color: color,
+        child: Container(
+          margin: EdgeInsets.all(16.0),
+          child: Column(
+            children: <Widget>[
+              HeadText(),
+              SelectedWallet(
+                wallet: widget.fromWallet,
+                onPressed: () {
+                  Navigator.pop(context);
+                  Navigator.pop(context);
+                },
               ),
-            ),
-            SizedBox(
-              height: 20.0,
-            ),
-            SelectedWallet(
-              wallet: widget.fromWallet,
-              onPressed: () {
-                Navigator.pop(context);
-                Navigator.pop(context);
-              },
-            ),
-            SizedBox(
-              height: 20.0,
-            ),
-            Text(
-              "TO ADDRESS",
-              style: TextStyle(
-                fontSize: 18.0,
-                letterSpacing: 2.0,
-                color: color,
+              HeadText(text: "TO ADDRESS"),
+              SelectedWallet(
+                wallet: widget.toWallet,
+                onPressed: () {
+                  Navigator.pop(context);
+                },
               ),
-            ),
-            SizedBox(
-              height: 20.0,
-            ),
-            SelectedWallet(
-              wallet: widget.toWallet,
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-            SizedBox(
-              height: 30.0,
-            ),
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: 16.0),
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    alignment: Alignment.topLeft,
-                    height: 20.0,
-                    child: Text(
-                      isLabelFocus
-                          ? "Label (Optional)"
-                          : isValidateLabel == true || isValidateLabel == null
-                              ? "Label (Optional)"
-                              : "Special characters not permitted, please try again",
-                      style: TextStyle(
-                        color: isLabelFocus ||
-                                isValidateLabel == true ||
-                                isValidateLabel == null
-                            ? color
-                            : Color(0xFFf55d7f),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 3.0,
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(4.0),
-                      border: Border.all(
-                        color:
-                            isValidateLabel == true || isValidateLabel == null
-                                ? Theme.of(context).iconTheme.color
-                                : Color(0xFFf55d7f),
-                      ),
-                    ),
-                    child: Theme(
-                      data: ThemeData(
-                        primaryColor:
-                            isValidateLabel == true || isValidateLabel == null
-                                ? Theme.of(context).iconTheme.color
-                                : Color(0xFFf55d7f),
-                      ),
-                      child: TextField(
-                        controller: labelController,
-                        focusNode: labelFocus,
-                        textInputAction: TextInputAction.next,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          suffixIcon: labelController.text.isEmpty
-                              ? SizedBox()
-                              : IconButton(
-                                  icon: Icon(
-                                    Icons.close,
-                                    color: Theme.of(context).iconTheme.color,
-                                  ),
-                                  onPressed: () {
-                                    setState(() {
-                                      labelController = TextEditingController();
-                                    });
-                                  },
-                                ),
-                          focusColor: Theme.of(context).iconTheme.color,
-                          hintText: "Label",
-                        ),
-                        onSubmitted: (value) {
-                          FocusScope.of(context).requestFocus(amountFocus);
-                        },
-                        onChanged: (value) {
-                          if (value.isEmpty) {
-                            setState(() {
-                              isValidateLabel = false;
-                            });
-                          } else {
-                            setState(() {
-                              isValidateLabel = true;
-                            });
-                          }
-                        },
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 50.0,
-                  ),
-                  Container(
-                    alignment: Alignment.topLeft,
-                    height: 20.0,
-                    child: Text(
-                      isAmountFocus
-                          ? "Amount (RPD)"
-                          : isValidateAmount == true || isValidateAmount == null
-                              ? "Amount (RPD)"
-                              : "Minimum amount must be more than 1RPD",
-                      style: TextStyle(
-                        color: isAmountFocus ||
-                                isValidateAmount == true ||
-                                isValidateAmount == null
-                            ? color
-                            : Color(0xFFf55d7f),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 3.0,
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(4.0),
-                      border: Border.all(
-                        color:
-                            isValidateAmount == true || isValidateAmount == null
-                                ? Theme.of(context).iconTheme.color
-                                : Color(0xFFf55d7f),
-                      ),
-                    ),
-                    child: Theme(
-                      data: ThemeData(
-                        primaryColor:
-                            isValidateAmount == true || isValidateAmount == null
-                                ? Theme.of(context).iconTheme.color
-                                : Color(0xFFf55d7f),
-                      ),
-                      child: TextField(
-                        controller: amountController,
-                        keyboardType: TextInputType.number,
-                        focusNode: amountFocus,
-                        textInputAction: TextInputAction.done,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          focusColor: Theme.of(context).iconTheme.color,
-                          hintText: "Receiving Amount",
-                          suffixIcon: amountController.text.isEmpty
-                              ? SizedBox()
-                              : IconButton(
-                                  icon: Icon(
-                                    Icons.close,
-                                    color: Theme.of(context).iconTheme.color,
-                                  ),
-                                  onPressed: () {
-                                    setState(() {
-                                      amountController =
-                                          TextEditingController();
-                                    });
-                                  },
-                                ),
-                        ),
-                        onChanged: (value) {
-                          if (value.isEmpty) {
-                            setState(() {
-                              isValidateAmount = false;
-                            });
-                          } else {
-                            setState(() {
-                              isValidateAmount = true;
-                            });
-                          }
-                        },
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 50.0,
-                  ),
-                  CustomButton(
-                    text: "REQUEST PAYMENT",
-                    onPressed: () => Router.goToWidget(
-                      context: context,
-                      page: TransferConfirmPayment(
-                        fromWallet: widget.fromWallet,
-                        toWallet: widget.toWallet,
-                        amount: amountController.text,
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20.0,
-                  ),
-                  ButtonNotFilled(
-                    text: "CANCEL",
-                    fontSize: 17.0,
-                    height: 60.0,
-                    margin: EdgeInsets.all(0.0),
-                    onTap: () {
-                      TransferWidgetFunction()
-                          .cancelPayment(context: context, provider: provider);
-                    },
-                  ),
-                  SizedBox(
-                    height: 20.0,
-                  )
-                ],
+              EmptySpace(multiple: 4.0),
+              TextField(
+                controller: labelController,
+                focusNode: labelFocus,
+                textInputAction: TextInputAction.next,
+                decoration: InputDecoration(
+                  enabledBorder: border,
+                  focusedBorder: border,
+                  contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
+                  labelText: "Label",
+                ),
+                onSubmitted: (_) {
+                  FocusScope.of(context).requestFocus(amountFocus);
+                },
               ),
-            )
-          ],
+              const EmptySpace(multiple: 3.0),
+              TextField(
+                controller: amountController,
+                keyboardType: TextInputType.number,
+                focusNode: amountFocus,
+                decoration: InputDecoration(
+                  enabledBorder: border,
+                  focusedBorder: border,
+                  contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
+                  labelText: "Amount (RPD)",
+                ),
+              ),
+              const EmptySpace(multiple: 4.0),
+              CustomButton(
+                text: "REQUEST PAYMENT",
+                onPressed: () => Router.goToWidget(
+                  context: context,
+                  page: TransferConfirmPayment(
+                    fromWallet: widget.fromWallet,
+                    toWallet: widget.toWallet,
+                    amount: amountController.text,
+                  ),
+                ),
+              ),
+              const EmptySpace(multiple: 2.0),
+              CustomOutlineButton(
+                text: "CANCEL",
+                color: Theme.of(context).iconTheme.color,
+                onPressed: () {
+                  TransferWidgetFunction()
+                      .cancelPayment(context: context, provider: provider);
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

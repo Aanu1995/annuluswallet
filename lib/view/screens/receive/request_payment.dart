@@ -17,15 +17,25 @@ class RequestPaymentPage extends StatefulWidget {
 }
 
 class _RequestPaymentPageState extends State<RequestPaymentPage> {
-  TextEditingController labelController = TextEditingController();
-  TextEditingController amountController = TextEditingController();
-
-  FocusNode labelFocus = FocusNode();
-  FocusNode amountFocus = FocusNode();
+  TextEditingController labelController;
+  TextEditingController amountController;
+  FocusNode labelFocus;
+  FocusNode amountFocus;
   bool status = false;
 
   @override
+  void initState() {
+    super.initState();
+    labelController = TextEditingController();
+    amountController = TextEditingController();
+    labelFocus = FocusNode();
+    amountFocus = FocusNode();
+  }
+
+  @override
   void dispose() {
+    labelFocus.dispose();
+    amountFocus.dispose();
     labelFocus.dispose();
     amountFocus.dispose();
     super.dispose();

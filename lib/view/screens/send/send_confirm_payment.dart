@@ -31,7 +31,7 @@ class SendConfirmPayment extends StatelessWidget {
         elevation: 0.0,
         backgroundColor: Colors.white,
         leading: Container(
-          padding: EdgeInsets.only(top: 10.0),
+          padding: EdgeInsets.only(top: 8.0),
           child: InkWell(
             child: Image.asset(
               leftArrow,
@@ -67,9 +67,8 @@ class SendConfirmPayment extends StatelessWidget {
                 transfer,
                 height: 35.0,
                 width: 35.0,
-                color: Colors.green,
               ),
-              EmptySpace(multiple: 4.0),
+              EmptySpace(multiple: 3.0),
               Text(
                 fromWallet.walletType.toUpperCase(),
                 style: TextStyle(
@@ -162,7 +161,7 @@ class SendConfirmPayment extends StatelessWidget {
                   color: color,
                 ),
               ),
-              EmptySpace(multiple: 3.0),
+              EmptySpace(multiple: 4.0),
               CustomButton(
                 text: "CONFIRM PAYMENT",
                 onPressed: () async {},
